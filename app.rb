@@ -9,4 +9,7 @@ class Application < Sinatra::Base
   get '/' do
     return erb(:index)
   end
+
+  
+
 end
