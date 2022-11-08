@@ -13,3 +13,7 @@ gem "rack-test", "~> 1.1"
 gem "rspec", "~> 3.11"
 
 gem "rainbow", "~> 3.1"
+
+gem "simplecov", "~> 0.21.2"
+
+gem "simplecov-console", "~> 0.9.1"
