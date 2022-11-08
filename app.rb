@@ -10,6 +10,9 @@ class Application < Sinatra::Base
     return erb(:index)
   end
 
-  
+  # get '/create_listing' do
 
+
+  #   erb :create_listing
+  # end
 end
