@@ -50,7 +50,7 @@ describe ListingRepository do
       repo.create(listing)
 
       listings = repo.all
-      p last_listing = listings.last
+      last_listing = listings.last
       expect(last_listing.user_id).to eq 2
       expect(last_listing.name).to eq 'Pergatory'
       expect(last_listing.description).to eq "When you just can't decide where to go."
