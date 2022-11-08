@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Arkle-BnB</title>
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <p>[ARKLE BNB]</p>
+        <div class="links__container">
+          <a class="link" href="#">Home</a>
+          <a class="link" href="#">Log out</a>
+        </div>
+      </nav>
+      <section class="blurb">
+        <h1 class="blurb__header">List a Space</h1>
+        <p class="blurb__text">
+          Unlock the full potential of your space!
+        </p>
+      </section>
+      <div class="form__container">
+        <h3 class="form__header">Listing Details</h3>
+        <form class="form" action="/listings" method="POST">
+          <label class="form__label" for="name">Name</label
+          ><input class="form__input" type="text" name="name" />
+          <label class="form__label" for="description">Description</label
+          ><input class="form__input" type="text" name="description" />
+          <label class="form__label" for="password">Price per night</label
+          ><input class="form__input" type="number" name="night_price" />
+          <input class="form__input form__submit" type="submit" value="List" />
+        </form>
+      </div>
+    </header>
+  </body>
+</html>
