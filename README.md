@@ -36,7 +36,7 @@ Compassion
 
 We will have a nominated leader/spokesperson which will rotate daily
 Robin Mon
-Joe tues
+Joe Tues
 Iain Weds
 Will Thurs
 FRI TBC (pen to decide)
