@@ -41,12 +41,8 @@ class ListingRepository
     sql_params = [listing.user_id, listing.name, listing.description, listing.night_price]
     DatabaseConnection.exec_params(sql, sql_params)
     sql2 = 'select id from listings where name = $1'
-    
     params = [listing.name]
     result = DatabaseConnection.exec_params(sql2, params)[0]['id'] # Returns unique id of just created listing
   end
 
-  def return_last_id
-  
-  end
 end

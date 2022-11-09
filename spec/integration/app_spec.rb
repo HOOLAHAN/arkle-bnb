@@ -148,7 +148,7 @@ describe Application do
     end
   end
 
-  context "POST /login" do
+  # context "POST /login" do
     # it "can show success page" do
     #   response = post('/login', email: "anna@gmail.com", password:'1234')
     #   expect(response.status).to eq 200
@@ -160,7 +160,8 @@ describe Application do
       expect(response.status).to eq 400
       expect(response.body).to include 'password wrong'
     end
-
+    
+    
     context "get '/logout' logs you out" do
       it 'logs you out if you click the link' do
         get('/logout')
@@ -170,11 +171,19 @@ describe Application do
         expect(response.body).to include('Please Signup or Login.')
       end
     end
-
+    
     context "get '/account" do
       it "routes to account page correctly" do
-        
+        response = get('/account')
+        expect(response.status).to eq 200
+        # expect(response.body).to include ("My Account")
       end 
+      
+      it "returns array of requests by requesterid" do
+        post('/login', email: "bezel@gmail.com", password:'666')
+        response = get('/account')
+        expect(response.status).to eq 200
+        expect(response[0].listing_name).to eq ('Dark Satanic Mills')
+      end
     end
-  end
 end
