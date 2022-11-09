@@ -170,5 +170,11 @@ describe Application do
         expect(response.body).to include('Please Signup or Login.')
       end
     end
+
+    context "get '/account" do
+      it "routes to account page correctly" do
+        
+      end 
+    end
   end
 end
