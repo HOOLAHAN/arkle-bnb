@@ -89,9 +89,9 @@ class Application < Sinatra::Base
     @new_listing.night_price = params[:night_price]
 
     new_id = listing.create(@new_listing)
-    
+
     dateslist = DatesListRepository.new.add_dates(new_id, params[:start_date], params[:end_date])
-    
+
     return erb(:create_listing)
   end
 
@@ -101,21 +101,28 @@ class Application < Sinatra::Base
 
     return erb(:listings)
   end
- 
+
   post '/book_a_night/:listing_id' do
     repo = DatesListRepository.new
-    dates_list = repo.find_by_listing_as_objects(params[:listing_id])
-    
+    listing_id = params[:listing_id]
+    dates_list = repo.find_by_listing_as_objects(listing_id)
+
     dates_list.each do |date_list|
       if params[:date] == date_list.date
         @date_list_id = date_list.id
         break
       end
     end
-    if @date_list_id.nil? 
-      return "error"
-    else 
-      #CREATE THE REQUEST
+    if @date_list_id.nil?
+      return 'error'
+    else
+      # CREATE THE REQUEST
+      request_repo = RequestsRepository.new
+      request = Request.new
+      request.user_id = session[:user_id]
+      request.date_list_id = @date_list_id
+      request_repo.create(request)
+
       return erb(:booking_requested)
     end
   end
