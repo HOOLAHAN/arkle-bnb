@@ -25,15 +25,17 @@
       </section>
       <ul class="list">
         <% @requests.each do |request| %>
-        <a href="/requests/<%= request.id %>">
+         <a href="/requests/<%= request['id'] %>">
           <li class="list__item">
-            <div class="request request__name"><%= request.name %></div>
+            <div class="request request__name"><%= request['name'] %></div>
             <div class="request request__description">
-              <%= request.description %>
+              <%= request['description'] %>
             </div>
             <div class="request request__night_price">
-              £<%= request.night_price.to_i / 100 %>.00 /night
+              £<%= request['night_price'].to_i / 100 %>.00 /night
             </div>
+            <div class="request request__description">
+            <%= request['date'] %>
           </li>
         </a>
         <% end %>

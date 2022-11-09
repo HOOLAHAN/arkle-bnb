@@ -115,9 +115,10 @@ class Application < Sinatra::Base
     return erb(:listing)
   end
 
-  get '/account' do
-    requestrepo = RequestsRepository.new.find_requests_by_requester_user_id(session[:user_id]) #THIS SHOULD BE LIST
-    binding.irb
-    # return erb(:account)
+  get '/account/:user_id' do
+    user_id = session[:user_id]
+    requestrepo = RequestsRepository.new 
+    @requests = requestrepo.find_requests_by_requester_user_id(session[:user_id])
+    return erb(:account)
   end
 end

@@ -10,10 +10,10 @@ class RequestsRepository
         requestarray = []
         requests.each do |request|
             newrequest = Request.new
-            # newrequest.user_id = request['user_id']
-            # newrequest.date = request['date']
-            # newrequest.listing_name = request['name']
-            # newrequest.listing_id = request['listing_id']
+            newrequest.user_id = request['user_id']
+            newrequest.date = request['date']
+            newrequest.listing_name = request['name']
+            newrequest.listing_id = request['listing_id']
         requestarray << newrequest
         end
     end

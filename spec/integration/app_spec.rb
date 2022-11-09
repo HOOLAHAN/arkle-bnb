@@ -174,19 +174,19 @@ describe Application do
     end
     
     context "get '/account" do
-      xit "routes to account page correctly" do
+      it "routes to account page correctly" do
         post('/login', email: "bezel@gmail.com", password:'666')
-        response = get('/account')
+        response = get('/account/1')
         expect(response.status).to eq 200
-        # expect(response.body).to include ("My Account")
+        # expect(response.body).to include("My Account")
       end 
       
       it "returns array of requests by requesterid" do
         post('/login', email: "anna@gmail.com", password:'1234')
-        response = get('/account')
+        response = get('/account/:user_id')
         expect(response.status).to eq 200
-        expect(response[0].date).to eq ("2023-04-01")
-        expect(response[0].listing_name).to eq ("Dark Satanic Mills")
+        expect(response.body).to include("2023-04-01")
+        expect(response.body).to include("Dark Satanic Mills")
       end
     end
 end
