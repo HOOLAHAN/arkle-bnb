@@ -5,6 +5,7 @@ require_relative 'lib/database_connection'
 require './lib/listing'
 require './lib/listing_repository'
 require './lib/dates_list_repository'
+require './lib/requests_repository'
 require 'user_repository'
 
 DatabaseConnection.connect('bnb_test')
@@ -103,8 +104,20 @@ class Application < Sinatra::Base
  
   post '/book_a_night/:listing_id' do
     repo = DatesListRepository.new
-    @booking_request = repo.find_by_listing_dates(params[:listing_id])
-    return erb(:booking_requested)
+    dates_list = repo.find_by_listing_as_objects(params[:listing_id])
+    
+    dates_list.each do |date_list|
+      if params[:date] == date_list.date
+        @date_list_id = date_list.id
+        break
+      end
+    end
+    if @date_list_id.nil? 
+      return "error"
+    else 
+      #CREATE THE REQUEST
+      return erb(:booking_requested)
+    end
   end
 
   get '/listings/:listing_id' do

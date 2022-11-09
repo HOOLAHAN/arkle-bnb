@@ -1,6 +1,6 @@
 # require 'date'
 
-class Date
+class DateList
     attr_accessor :id, :listing_id, :date, :booked_status, :booker_id
 end
 
@@ -20,6 +20,24 @@ class DatesListRepository
   def find_by_listing(listing_id)
     sql = "select * from dates_list where listing_id = $1"
     DatabaseConnection.exec_params(sql,[listing_id])
+  end
+
+  def find_by_listing_as_objects(listing_id)
+    sql = "select * from dates_list where listing_id = $1"
+    response_array = DatabaseConnection.exec_params(sql,[listing_id])
+    
+    dates_list = []
+    response_array.each do |record|
+      date_list = DateList.new
+      date_list.id = record["id"]
+      date_list.listing_id = record["listing_id"]
+      date_list.date = record["date"]
+      date_list.booked_status = record["booked_status"]
+      date_list.booker_id = record["booker_id"]
+
+      dates_list << date_list
+    end
+    return dates_list
   end
 
   def find_by_listing_dates(listing_id)

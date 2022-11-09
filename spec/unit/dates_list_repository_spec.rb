@@ -27,5 +27,9 @@ RSpec.describe DatesListRepository do
     expect(dateslist.find_by_listing_dates('3')).to include ('2023-02-06')
   end
 
+  it "find_by_listing_as_objects" do
+    expect(dateslist.find_by_listing_as_objects(1)[0].date).to eq '2023-01-20'
+    expect(dateslist.find_by_listing_as_objects(1)[1].date).to eq '2023-01-21'
+  end
 
 end

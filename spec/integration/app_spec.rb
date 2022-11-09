@@ -79,11 +79,13 @@ describe Application do
     end
   end
 
-  context 'POST /book_a_night/1' do
-    xit 'should return the form which generates a booking request' do
-      response = post('/book_a_night/1', date_list_id: 1)
+  context 'POST /book_a_night' do
+    it 'should return the form which generates a booking request' do
+      post('/login', email: "anna@gmail.com", password:'1234')
+      response = post('/book_a_night/3', date: '2023-02-02')  #selecting dates_list_id 9
       expect(response.status).to eq(200)
-      expect(response.body).to include('?')
+      response = RequestsRepository.new.all
+      expect(response.length).to eq 9
     end
   end
 
