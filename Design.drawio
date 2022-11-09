@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="B5izYE9bR6RBEacKUjwg" name="Page-1">
-        <mxGraphModel dx="952" dy="539" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="1990" dy="1545" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -101,7 +101,7 @@
                 <mxCell id="53" style="edgeStyle=none;html=1;entryX=0;entryY=0.75;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="49" target="34" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="54" value="&lt;b&gt;welcome page&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;i&gt;Link to signup&lt;br&gt;&lt;/i&gt;&lt;br&gt;&lt;i&gt;Link to login&lt;/i&gt;" style="html=1;sketch=1;" parent="1" vertex="1">
+                <mxCell id="54" value="&lt;b&gt;welcome page&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;i&gt;Link to signup&lt;br&gt;&lt;/i&gt;&lt;br&gt;&lt;i&gt;Link to login&lt;/i&gt;" style="html=1;sketch=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
                     <mxGeometry x="358" y="750" width="112" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="55" value="" style="html=1;shadow=0;dashed=0;align=center;verticalAlign=middle;shape=mxgraph.arrows2.arrow;dy=0.6;dx=40;direction=south;notch=0;sketch=1;" parent="1" vertex="1">
@@ -128,13 +128,13 @@
                 <mxCell id="73" style="edgeStyle=none;html=1;entryX=0.595;entryY=0.015;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="63" target="71" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="63" value="Login&lt;br&gt;&lt;br&gt;&lt;i&gt;Form with fields:&lt;br&gt;&lt;/i&gt;[email, password]" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;" parent="1" vertex="1">
+                <mxCell id="63" value="Login&lt;br&gt;&lt;br&gt;&lt;i&gt;Form with fields:&lt;br&gt;&lt;/i&gt;[email, password]" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
                     <mxGeometry x="450" y="930" width="120" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="72" style="edgeStyle=none;html=1;entryX=0.313;entryY=0.015;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="64" target="71" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="64" value="Signup&lt;br&gt;&lt;br&gt;&lt;i&gt;Form with fields:&lt;br&gt;&lt;/i&gt;[name, email, password]&lt;br&gt;Also logs in" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;" parent="1" vertex="1">
+                <mxCell id="64" value="Signup&lt;br&gt;&lt;br&gt;&lt;i&gt;Form with fields:&lt;br&gt;&lt;/i&gt;[name, email, password]&lt;br&gt;Also logs in" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
                     <mxGeometry x="270" y="930" width="140" height="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="67" value="" style="curved=1;endArrow=classic;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="63" edge="1">
@@ -163,13 +163,16 @@
                 <mxCell id="70" value="{duplicate signup}" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;" parent="1" vertex="1">
                     <mxGeometry x="210" y="900" width="110" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="78" style="edgeStyle=none;html=1;entryX=0.166;entryY=-0.008;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1.006;exitY=0.694;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="71" target="77" edge="1">
+                <mxCell id="78" style="edgeStyle=none;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1.006;exitY=0.694;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="71" target="86" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="79" style="edgeStyle=none;html=1;entryX=0.889;entryY=-0.012;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0;exitY=1;exitDx=0;exitDy=0;" parent="1" source="71" target="76" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="71" value="Basic Menu Page&lt;br&gt;&lt;br&gt;&lt;i&gt;link to Lister&lt;br&gt;link to Booker&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;" parent="1" vertex="1">
+                <mxCell id="101" style="edgeStyle=none;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="71" target="94">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="71" value="Basic Menu Page&lt;br&gt;&lt;br&gt;&lt;i&gt;link to Lister&lt;br&gt;link to Booker&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
                     <mxGeometry x="380" y="1040" width="120" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="74" value="post '/login'" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;" parent="1" vertex="1">
@@ -178,20 +181,26 @@
                 <mxCell id="75" value="post '/signup" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;" parent="1" vertex="1">
                     <mxGeometry x="329.59000000000003" y="1010" width="80" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="76" value="Create a listing&lt;br&gt;&lt;br&gt;&lt;i&gt;Form with listing:&lt;br&gt;&lt;/i&gt;[name, description, night_price, available_dates]" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;" parent="1" vertex="1">
-                    <mxGeometry x="250" y="1140" width="120" height="90" as="geometry"/>
+                <mxCell id="102" style="edgeStyle=none;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="76" target="96">
+                    <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="84" style="edgeStyle=none;html=1;entryX=0.708;entryY=1.054;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="77" target="71" edge="1">
+                <mxCell id="108" style="edgeStyle=none;html=1;exitX=0.25;exitY=0;exitDx=0;exitDy=0;entryX=0.912;entryY=1.021;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="76" target="94">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="76" value="Create a listing&lt;br&gt;&lt;br&gt;&lt;i&gt;Form with listing:&lt;br&gt;&lt;/i&gt;[name, description, night_price, available_dates]" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+                    <mxGeometry x="220" y="1150" width="120" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="84" style="edgeStyle=none;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="77" target="89" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="77" value="Request to book a night&lt;br&gt;&lt;i&gt;Shows listing and dates&lt;/i&gt;&lt;br&gt;&lt;i&gt;Button to book a night&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;" parent="1" vertex="1">
-                    <mxGeometry x="520" y="1120" width="150" height="90" as="geometry"/>
+                    <mxGeometry x="670" y="1210" width="150" height="90" as="geometry"/>
                 </mxCell>
-                <mxCell id="80" value="get '/listing_request:listing_id'" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;" parent="1" vertex="1">
-                    <mxGeometry x="519.59" y="1080" width="180" height="30" as="geometry"/>
+                <mxCell id="80" value="get '/listings/:listing_id'" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;" parent="1" vertex="1">
+                    <mxGeometry x="655" y="1160" width="180" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="81" value="get '/create_listing'" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;" parent="1" vertex="1">
-                    <mxGeometry x="229.59" y="1100" width="180" height="30" as="geometry"/>
+                    <mxGeometry x="248.5" y="1100" width="180" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="82" value="" style="endArrow=classic;html=1;entryX=0.585;entryY=1.018;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="76" target="71" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -203,7 +212,70 @@
                     <mxGeometry x="380" y="1130" width="60" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="85" value="post '/book_a_night'" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;" parent="1" vertex="1">
-                    <mxGeometry x="450" y="1110" width="60" height="30" as="geometry"/>
+                    <mxGeometry x="595" y="1240" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="87" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.202;entryY=0.008;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="86" target="77">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="86" value="View all listings" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+                    <mxGeometry x="590" y="1049" width="150" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="88" value="get '/listings" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;" vertex="1" parent="1">
+                    <mxGeometry x="460" y="1055" width="180" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="90" style="edgeStyle=none;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="89" target="71">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="89" value="Booking request confirmed" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;" vertex="1" parent="1">
+                    <mxGeometry x="428.5" y="1240" width="150" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="92" value="redirect links" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;" vertex="1" parent="1">
+                    <mxGeometry x="440" y="1150" width="180" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="93" style="edgeStyle=none;html=1;entryX=0;entryY=1;entryDx=0;entryDy=0;exitX=0.475;exitY=-0.002;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="89" target="86">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="519" y="1237" as="sourcePoint"/>
+                        <mxPoint x="480" y="1110" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="98" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.46;entryY=0.002;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="94" target="97">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="99" style="edgeStyle=none;html=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.675;entryY=-0.009;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="94" target="96">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="100" style="edgeStyle=none;html=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="94" target="76">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="94" value="&lt;b&gt;account page&lt;/b&gt;&lt;br&gt;view my requests made&lt;br&gt;view my requests recieved (approve)&lt;br&gt;view my listings&lt;br&gt;link to create listing&lt;br&gt;link update/delete listing&lt;br&gt;link update/delete acc. details&amp;nbsp;" style="html=1;sketch=1;" vertex="1" parent="1">
+                    <mxGeometry x="-30" y="931" width="182" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="95" value="&lt;b&gt;Nav Bar&lt;br&gt;&lt;/b&gt;always - Home&lt;br&gt;login (if no session)&lt;br&gt;signup(if no session)&lt;br&gt;my account(if sessipon)&lt;br&gt;logout(if session)" style="html=1;sketch=1;" vertex="1" parent="1">
+                    <mxGeometry x="60" y="660" width="142" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="106" style="edgeStyle=none;html=1;exitX=1;exitY=0;exitDx=0;exitDy=0;entryX=0.357;entryY=1.001;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="96" target="94">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="96" value="update listing (or delete)&lt;br&gt;(add availability)" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;" vertex="1" parent="1">
+                    <mxGeometry x="-170" y="1140" width="150" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="107" style="edgeStyle=none;html=1;exitX=0.25;exitY=0;exitDx=0;exitDy=0;entryX=0.454;entryY=1.021;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="97" target="94">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="97" value="update account (or delete)" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;" vertex="1" parent="1">
+                    <mxGeometry x="2" y="1290" width="150" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="103" value="get '/update_listing'" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;" vertex="1" parent="1">
+                    <mxGeometry x="70" y="1169" width="180" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="104" value="get '/update_listing'" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;" vertex="1" parent="1">
+                    <mxGeometry x="-170" y="1079" width="180" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="105" value="get '/update_account'" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;" vertex="1" parent="1">
+                    <mxGeometry x="40" y="1230" width="180" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="109" value="get '/create_listing'" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=1;" vertex="1" parent="1">
+                    <mxGeometry x="50" y="1109" width="180" height="30" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>
