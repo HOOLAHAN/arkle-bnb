@@ -2,6 +2,7 @@ require 'spec_helper'
 require 'rack/test'
 require_relative '../../app'
 require 'json'
+# require 'request_repository'
 
 describe Application do
   include Rack::Test::Methods
@@ -173,17 +174,19 @@ describe Application do
     end
     
     context "get '/account" do
-      it "routes to account page correctly" do
+      xit "routes to account page correctly" do
+        post('/login', email: "bezel@gmail.com", password:'666')
         response = get('/account')
         expect(response.status).to eq 200
         # expect(response.body).to include ("My Account")
       end 
       
       it "returns array of requests by requesterid" do
-        post('/login', email: "bezel@gmail.com", password:'666')
+        post('/login', email: "anna@gmail.com", password:'1234')
         response = get('/account')
         expect(response.status).to eq 200
-        expect(response[0].listing_name).to eq ('Dark Satanic Mills')
+        expect(response[0].date).to eq ("2023-04-01")
+        expect(response[0].listing_name).to eq ("Dark Satanic Mills")
       end
     end
 end
