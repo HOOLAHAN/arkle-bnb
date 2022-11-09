@@ -44,14 +44,23 @@ describe Application do
 
   context 'POST /listings' do
     it 'should return the form which generates a new listing' do
-      response = post('/listings', name: 'Palacial Pad', description: 'A heavenly way to get away, no way!', night_price: 50000)
+      response = post('/listings', name: 'Palacial Pad', description: 'A heavenly way to get away, no way!', night_price: 50000, start_date: '2027-01-01', end_date: '2027-02-01')
       expect(response.status).to eq (200)
     end
-    it 'should populate with all correct information' do
+    
+    it 'should populate with user_id information' do
       post('/login', email: 'anna@gmail.com', password: '1234')
-      response = post('/listings', name: 'Palacial Pad', description: 'A heavenly way to get away, no way!', night_price: 50000)
+      response = post('/listings', name: 'Palacial Pad', description: 'A heavenly way to get away, no way!', night_price: 50000, start_date: '2027-01-01', end_date: '2027-02-01')
       expect(response.status).to eq 200
       expect(ListingRepository.new.find('4').user_id).to eq 1
+    end
+    
+    it 'should take start and end date from 2x fields' do
+      post('/login', email: 'thehoax@gmail.com', password: 'unbelievable')
+      post('/listings', name: 'Trump tower', description: 'I will be back', night_price: 250000, start_date: '2023-01-03', end_date: '2023-02-03')
+      expect(DatesListRepository.new.find_by_listing('4')[0]['date']).to include ('2023-01-03') 
+      # expect(DatesListRepository.new.find_by_listing('4')['date']).to include ('2023-02-03') 
+      # expect(DatesListRepository.new.find_by_listing('4')['date']).to include ('2023-01-20') 
     end
   end
 
