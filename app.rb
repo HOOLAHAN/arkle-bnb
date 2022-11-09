@@ -1,11 +1,10 @@
-$LOAD_PATH << "lib"
+$LOAD_PATH << 'lib'
 require 'sinatra/base'
 require 'sinatra/reloader'
 require_relative 'lib/database_connection'
 require './lib/listing'
 require './lib/listing_repository'
 require 'user_repository'
-
 
 DatabaseConnection.connect('bnb_test')
 
@@ -17,13 +16,13 @@ class Application < Sinatra::Base
   enable :sessions
 
   get '/' do
-    if session[:name] == nil
+    if session[:name].nil?
       return erb(:welcome)
     else
       return erb(:welcomeloggedin)
     end
   end
-  
+
   get '/welcome' do
     return erb(:welcome)
   end
@@ -49,7 +48,7 @@ class Application < Sinatra::Base
     @user = session[:name]
     return erb(:menu_page)
   end
-  
+
   post '/login' do
     new_user = UserRepository.new.find_user_by_email(params[:email])
     if params[:password] == new_user.password
@@ -87,8 +86,14 @@ class Application < Sinatra::Base
     return erb(:create_listing)
   end
 
-  get '/listing_request/:listing_id' do
-    return erb(:new_listing_request)
+  get '/listings' do
+    repo = ListingRepository.new
+    @listings = repo.all
+
+    return erb(:listings)
   end
 
+  get '/listings/:listing_id' do
+    return erb(:new_listing_request)
+  end
 end
