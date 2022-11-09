@@ -116,21 +116,8 @@ class Application < Sinatra::Base
   end
 
   get '/account' do
-    repo = RequestsRepository.new
-    requests = repo.find_requests_by_requester_user_id(session[:user_id]) #THIS SHOULD BE LIST
-    requestarray = []
-    requests.each do |request|
-      newrequest = Request.new
-      newrequest.user_id = request['user_id']
-      # newrequest.user_name = request['name']
-      newrequest.date = request['date']
-      newrequest.listing_name = request['name']
-      newrequest.listing_id = request['listing_id']
-      requestarray << newrequest
-    end
-    # binding.irb
-    return requestarray
-    
+    requestrepo = RequestsRepository.new.find_requests_by_requester_user_id(session[:user_id]) #THIS SHOULD BE LIST
+    binding.irb
     # return erb(:account)
   end
 end
