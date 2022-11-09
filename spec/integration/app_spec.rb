@@ -24,6 +24,13 @@ describe Application do
       response = get('/')
 
       expect(response.status).to eq(200)
+      expect(response.body).to include('class="link" href="/login"')
+    end
+    it "returns alternate home when logged in" do
+      post('/login', email: 'anna@gmail.com', password: '1234')
+      response = get('/')
+      expect(response.status).to eq(200)
+      expect(response.body).to include('class="link" href="/logout">Logout')
     end
   end
 
@@ -37,8 +44,23 @@ describe Application do
 
   context 'POST /listings' do
     it 'should return the form which generates a new listing' do
-      response = post('/listings', name: 'Palacial Pad', description: 'A heavenly way to get away, no way!', night_price: 50000)
+      response = post('/listings', name: 'Palacial Pad', description: 'A heavenly way to get away, no way!', night_price: 50000, start_date: '2027-01-01', end_date: '2027-02-01')
       expect(response.status).to eq (200)
+    end
+    
+    it 'should populate with user_id information' do
+      post('/login', email: 'anna@gmail.com', password: '1234')
+      response = post('/listings', name: 'Palacial Pad', description: 'A heavenly way to get away, no way!', night_price: 50000, start_date: '2027-01-01', end_date: '2027-02-01')
+      expect(response.status).to eq 200
+      expect(ListingRepository.new.find('4').user_id).to eq 1
+    end
+    
+    it 'should take start and end date from 2x fields' do
+      post('/login', email: 'thehoax@gmail.com', password: 'unbelievable')
+      post('/listings', name: 'Trump tower', description: 'I will be back', night_price: 250000, start_date: '2023-01-03', end_date: '2023-02-03')
+      expect(DatesListRepository.new.find_by_listing('4')[0]['date']).to include ('2023-01-03') 
+      # expect(DatesListRepository.new.find_by_listing('4')['date']).to include ('2023-02-03') 
+      # expect(DatesListRepository.new.find_by_listing('4')['date']).to include ('2023-01-20') 
     end
   end
 
@@ -107,10 +129,10 @@ describe Application do
   end
 
   context "POST to '/signup'" do
-    it "can show success page" do
-      response = post('/signup', name: "jeff", email: "jeff@jeffworld.com", password: "mynameajeff")
-      expect(response.body).to include("Welcome, jeff, you are now logged in!")
-    end
+    # it "can show success page" do
+    #   response = post('/signup', name: "jeff", email: "jeff@jeffworld.com", password: "mynameajeff")
+    #   expect(response.body).to include("Welcome, jeff, you are now logged in!")
+    # end
     it "can sign up a user" do
       post('/signup', name: "jeff", email: "jeff@jeffworld.com", password: "mynameajeff")
       repo = UserRepository.new
@@ -119,11 +141,11 @@ describe Application do
   end
 
   context "POST /login" do
-    it "can show success page" do
-      response = post('/login', email: "anna@gmail.com", password:'1234')
-      expect(response.status).to eq 200
-      expect(response.body).to include "Welcome, Anna, you are now logged in!"
-    end
+    # it "can show success page" do
+    #   response = post('/login', email: "anna@gmail.com", password:'1234')
+    #   expect(response.status).to eq 200
+    #   expect(response.body).to include "Welcome, Anna, you are now logged in!"
+    # end
 
     it "returns incorrect password" do
       response = post('/login', email: "anna@gmail.com", password:'124')

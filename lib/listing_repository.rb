@@ -40,8 +40,13 @@ class ListingRepository
     sql = 'INSERT INTO listings (user_id, name, description, night_price) VALUES ($1, $2, $3, $4);'
     sql_params = [listing.user_id, listing.name, listing.description, listing.night_price]
     DatabaseConnection.exec_params(sql, sql_params)
+    sql2 = 'select id from listings where name = $1'
+    
+    params = [listing.name]
+    result = DatabaseConnection.exec_params(sql2, params)[0]['id'] # Returns unique id of just created listing
+  end
 
-    # return nil
-    nil
+  def return_last_id
+  
   end
 end

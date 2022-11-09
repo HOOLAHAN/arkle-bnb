@@ -4,6 +4,7 @@ require 'sinatra/reloader'
 require_relative 'lib/database_connection'
 require './lib/listing'
 require './lib/listing_repository'
+require './lib/dates_list_repository'
 require 'user_repository'
 
 
@@ -80,10 +81,17 @@ class Application < Sinatra::Base
   post '/listings' do
     listing = ListingRepository.new
     @new_listing = Listing.new
+
+    @new_listing.user_id = session[:user_id]
+
     @new_listing.name = params[:name]
     @new_listing.description = params[:description]
     @new_listing.night_price = params[:night_price]
-    listing.create(@new_listing)
+
+    new_id = listing.create(@new_listing)
+    
+    dateslist = DatesListRepository.new.add_dates(new_id, params[:start_date], params[:end_date])
+    
     return erb(:create_listing)
   end
 
