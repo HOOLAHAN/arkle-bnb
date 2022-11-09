@@ -80,6 +80,7 @@ class Application < Sinatra::Base
   post '/listings' do
     listing = ListingRepository.new
     @new_listing = Listing.new
+    @new_listing.user_id = session[:user_id]
     @new_listing.name = params[:name]
     @new_listing.description = params[:description]
     @new_listing.night_price = params[:night_price]
