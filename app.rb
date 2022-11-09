@@ -92,8 +92,17 @@ class Application < Sinatra::Base
 
     return erb(:listings)
   end
+ 
+  post '/book_a_night/:listing_id' do
+    repo = DatesListRepository.new
+    @booking_request = repo.find_by_listing_dates(params[:listing_id])
+    return erb(:booking_requested)
+  end
 
   get '/listings/:listing_id' do
-    return erb(:new_listing_request)
+    repo = ListingRepository.new
+    @listing = repo.find(params[:listing_id])
+
+    return erb(:listing)
   end
 end

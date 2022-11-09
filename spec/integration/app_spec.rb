@@ -50,18 +50,19 @@ describe Application do
     end
   end
 
-  context 'GET /listing_request/:listing_id' do
-    xit 'should return the HTML content for requesting an individual listing' do
-      response = get('/listing_request/1')
+  context 'GET /listings/:listing_id' do
+    it 'should return the HTML content for requesting an individual listing' do
+      response = get('/listings/1')
       expect(response.status).to eq(200)
       expect(response.body).to include('ShittyShack')
     end
   end
 
-  context 'POST /book_a_night' do
+  context 'POST /book_a_night/1' do
     xit 'should return the form which generates a booking request' do
-      response = post('/book_a_night', date_list_id: 1)
-      expect(response.status).to eq(302)
+      response = post('/book_a_night/1', date_list_id: 1)
+      expect(response.status).to eq(200)
+      expect(response.body).to include('?')
     end
   end
 
