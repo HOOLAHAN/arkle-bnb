@@ -43,7 +43,7 @@ RSpec.describe DatesListRepository do
   end
 
   it "find_by_date_list_id" do
-    expect(dateslist.find_by_date_list_id(9).listing_id).to eq "3"
-    expect(dateslist.find_by_date_list_id(6).booked_status).to eq 'f'
+    expect(dateslist.find_by_date_list_id_as_object(9).listing_id).to eq "3"
+    expect(dateslist.find_by_date_list_id_as_object(6).booked_status).to eq 'f'
   end
 end
