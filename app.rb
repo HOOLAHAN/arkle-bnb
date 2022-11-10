@@ -115,10 +115,10 @@ class Application < Sinatra::Base
     return erb(:listing)
   end
 
-  get '/account/:user_id' do
-    user_id = session[:user_id]
+  get '/account' do 
     requestrepo = RequestsRepository.new 
     @requests = requestrepo.find_requests_by_requester_user_id(session[:user_id])
+    @booking_requests = requestrepo.find_requests_by_requester_user_id(session[:user_id])
     return erb(:account)
   end
 end

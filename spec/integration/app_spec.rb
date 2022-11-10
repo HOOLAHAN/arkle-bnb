@@ -175,18 +175,26 @@ describe Application do
     
     context "get '/account" do
       it "routes to account page correctly" do
-        post('/login', email: "bezel@gmail.com", password:'666')
-        response = get('/account/1')
+        post('/login', email: "bezel@gmail.com", password:'666') #this line not needed?
+        response = get('/account')
         expect(response.status).to eq 200
-        # expect(response.body).to include("My Account")
+        expect(response.body).to include("My Account")
       end 
       
       it "returns array of requests by requesterid" do
         post('/login', email: "anna@gmail.com", password:'1234')
-        response = get('/account/:user_id')
+        response = get('/account')
         expect(response.status).to eq 200
         expect(response.body).to include("2023-04-01")
         expect(response.body).to include("Dark Satanic Mills")
+      end
+      
+      it "returns requests for the logged in users' properties with requester name" do
+        post('/login', email: "bezel@gmail.com", password:'666')
+        response = get('/account')
+        expect(response.status).to eq 200
+        expect(response.body).to include "anna@gmail.com"
+
       end
     end
 end

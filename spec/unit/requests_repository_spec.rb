@@ -24,7 +24,8 @@ end
 it "find_requests_by_listing_user_id(user_id)" do
     results = requestslist.find_requests_by_listing_user_id('2')
     expect(results.ntuples).to eq 8
-    expect(results[3]['date_list_id']).to eq ('9')
+    expect(results[5]['date_list_id']).to eq ('24')
+    expect(results[5]['requester_email']).to eq ('anna@gmail.com')
 end
 
 end
