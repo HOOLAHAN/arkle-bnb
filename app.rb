@@ -167,5 +167,18 @@ class Application < Sinatra::Base
     end
       datelistrepo.update_booked_status(params[:date_list_id], newstatus, newbooker)
     redirect ('/account')
-    end
+  end
+
+  get '/my_messages' do
+    #1 show all confirmed bookings as a list (use new sql query but build off other ones, including temp table)
+    #2 enable messaging on these listings with a new box and a send button
+    return erb(:my_messages)
+  end
+
+  post '/add_message' do
+    #add new message to converse table
+    #takes relevant id's from loop (like on accounts page) and sends them as hidden query params.
+    redirect('/my_messages')
+  end
+
 end

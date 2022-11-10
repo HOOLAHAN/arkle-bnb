@@ -256,7 +256,13 @@ describe Application do
         expect(response.status).to eq 200
         expect(response.body).to include "f" #TODO make a not include test work
       end
+    end
 
+    context "when logged in, get '/my_messages" do
+      it "returns correct page" do
+        response = get('/my_messages')
+        expect(response.body).to include('<p class="blurb__text">Here is where you can message')
+      end
     end
 
 end

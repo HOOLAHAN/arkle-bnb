@@ -72,6 +72,9 @@ class DatesListRepository
     return DatabaseConnection.exec_params(sql,[date_list_id])
   end
 
-  
+  def select_all_confirmed_bookings_by_userid(user_id)
+    sql = "select * from dates_list where booker_id = $1 and booked_status = TRUE"
+    DatabaseConnection.exec_params(sql,[user_id])
+  end
 
 end

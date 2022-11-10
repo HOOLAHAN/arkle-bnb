@@ -1,6 +1,6 @@
 -- To accompany these tables create a database called 'bnb' and 'bnb_test'
 
-DROP TABLE IF EXISTS users, listings, dates_list, requests;
+DROP TABLE IF EXISTS users, listings, dates_list, requests, converse;
 
 CREATE TABLE users ("id" SERIAL PRIMARY KEY, "name" text, "email" text, "password" text);
 
@@ -17,6 +17,11 @@ CREATE TABLE dates_list ("id" SERIAL PRIMARY KEY, "listing_id" int, "date" date,
 CREATE TABLE requests ("id" SERIAL PRIMARY KEY, "user_id" int, "date_list_id" int,
     constraint fk_usermatch foreign key(user_id) references users(id) on delete cascade,
     constraint fk_datematch foreign key(date_list_id) references dates_list(id) on delete cascade);
+
+CREATE TABLE converse ("id" SERIAL PRIMARY KEY, "receiver_user_id" int, "sender_user_id" text, "message_time" TIMESTAMP, "message_content" text, "date_list_id" int, "listing_name" text,
+constraint fk_convo foreign key(receiver_user_id)
+references users(id)
+on delete cascade);
 
 
 INSERT INTO users ("name", "email", "password") VALUES 
@@ -67,5 +72,13 @@ INSERT INTO requests ("user_id", "date_list_id") VALUES
 (4, 9),
 (1,24),
 (1,26),
-(1,27);
+(1,27),
+(1,4);
 
+INSERT INTO converse ("id", "receiver_user_id", "sender_user_id", "message_time", "message_content", "date_list_id", "listing_name") VALUES
+(1,1,4, '2022-11-10 12:18:57', 'hey, thanks for confirming my booking',4,'MuddyShack'),
+(2,1,4, '2022-11-10 12:19:57', 'what happens with getting the key?',4,'MuddyShack'),
+(3,4,1, '2022-11-10 13:19:57', 'thanks for booking! key will be left under the plant pot',4,'MuddyShack'),
+(4,1,4, '2022-11-10 14:19:57', 'great - you got any good restaurant recommendations?',4,'MuddyShack'),
+(5,4,1, '2022-11-10 15:19:57', 'i hear macdonalds is nice this time of year',4,'MuddyShack'),
+(6,1,4, '2022-11-10 16:19:57', 'is that really the best thing around your way? nothing micheline starred?',4,'MuddyShack');
