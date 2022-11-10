@@ -23,7 +23,7 @@ RSpec.describe RequestsRepository do
       request.date_list_id = '2'
 
       repo.create(request)
-      expect(repo.all.length).to eq 9
+      expect(repo.all.length).to eq 11
     end
   end
 

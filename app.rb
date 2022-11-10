@@ -125,7 +125,7 @@ class Application < Sinatra::Base
       status 400
       @error = 'Listing not available'
       return erb(:booking_error)
-    elsif repo.find_by_date_list_id(@date_list_id).booked_status == 't'
+    elsif repo.find_by_date_list_id_as_object(@date_list_id).booked_status == 't'
       status 400
       @error = 'Listing already booked'
       return erb(:booking_error)

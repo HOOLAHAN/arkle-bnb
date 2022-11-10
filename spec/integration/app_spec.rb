@@ -19,6 +19,11 @@ describe Application do
     reset_table
   end
 
+  it "get to menu_page" do
+    expect(get('/menu_page').status).to eq 200
+    expect(get('/menu_page').body).to include("Menu")
+  end
+
   context 'GET /' do
     it 'should get the homepage' do
       response = get('/')
@@ -95,7 +100,7 @@ describe Application do
       response = post('/book_a_night/3', date: '2023-02-02') # selecting dates_list_id 9
       expect(response.status).to eq(200)
       response = RequestsRepository.new.all
-      expect(response.length).to eq 9
+      expect(response.length).to eq 11
     end
 
     it 'should return the form which generates a booking request' do
@@ -240,7 +245,7 @@ describe Application do
         post('/approve_request', date_list_id: "6", requester_id: "3")
         response = get('/account')
         expect(response.status).to eq 200
-        expect(response.body).to include "Booked Status t"
+        expect(response.body).to include "Approved"
       end
 
       it "post /approve_request turns the one true back to false" do
