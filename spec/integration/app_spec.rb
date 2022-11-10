@@ -91,6 +91,12 @@ describe Application do
       expect(response.length).to eq 9
     end
 
+    it 'should return the form which generates a booking request' do
+      post('/login', email: 'anna@gmail.com', password: '1234')
+      response = post('/book_a_night/3', date: '2023-02-02') # selecting dates_list_id 9
+      expect(response.body).to include('Request received')
+    end
+
     it 'should return error and status 400 when invalid date' do
       post('/login', email: 'anna@gmail.com', password: '1234')
       response = post('/book_a_night/3', date: '2000-01-01')
