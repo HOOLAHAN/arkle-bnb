@@ -26,7 +26,7 @@ INSERT INTO users ("name", "email", "password") VALUES
 ('Harriet', 'littleh@gmail.com', 'password'); 
 
 INSERT INTO listings ("user_id", "name", "description", "night_price") VALUES
-(1, 'ShittyShack', 'A surprisingly nice place to spend 10 minutes', 10000),
+(1, 'MuddyShack', 'A surprisingly nice place to spend 10 minutes', 10000),
 (2, 'Firey Pits', 'If you have ended up here, you will have to make the most of the experience. Low heating bills', 12900),
 (2, 'Dark Satanic Mills', 'Probably the best option I have in my portfolio', 39900);
 

@@ -27,9 +27,19 @@ RSpec.describe DatesListRepository do
     expect(dateslist.find_by_listing_dates('3')).to include ('2023-02-06')
   end
 
+
   it "find_by_listing_as_objects" do
     expect(dateslist.find_by_listing_as_objects(1)[0].date).to eq '2023-01-20'
     expect(dateslist.find_by_listing_as_objects(1)[1].date).to eq '2023-01-21'
+  end
+
+  it "updates booked status sets a property as booked TRUE with userid" do
+    dateslist.update_booked_status('1', 'TRUE', '4')
+    expect(dateslist.find_by_date_list_id('1')[0]['booked_status']).to eq ('t') 
+  end
+
+  it "find a date_list entry by its id" do
+    expect(dateslist.find_by_date_list_id('19')[0]['date']).to eq '2023-03-04'
   end
 
   it "find_by_date_list_id" do

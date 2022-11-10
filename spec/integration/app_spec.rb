@@ -2,6 +2,7 @@ require 'spec_helper'
 require 'rack/test'
 require_relative '../../app'
 require 'json'
+# require 'request_repository'
 
 describe Application do
   include Rack::Test::Methods
@@ -78,10 +79,13 @@ describe Application do
     it 'should return the HTML content for requesting an individual listing' do
       response = get('/listings/1')
       expect(response.status).to eq(200)
-      expect(response.body).to include('ShittyShack')
+
+
       expect(response.body).to include('2023-01-20')
       expect(response.body).to include('2023-01-21')
       expect(response.body).not_to include('2023-01-23')
+      expect(response.body).to include('MuddyShack')
+
     end
   end
 
@@ -187,18 +191,14 @@ describe Application do
   end
 
   context 'POST /login' do
-    # it "can show success page" do
-    #   response = post('/login', email: "anna@gmail.com", password:'1234')
-    #   expect(response.status).to eq 200
-    #   expect(response.body).to include "Welcome, Anna, you are now logged in!"
-    # end
-
     it 'returns incorrect password' do
       response = post('/login', email: 'anna@gmail.com', password: '124')
       expect(response.status).to eq 400
       expect(response.body).to include 'password wrong'
     end
-
+   
+  end
+    
     context "get '/logout' logs you out" do
       it 'logs you out if you click the link' do
         get('/logout')
@@ -208,6 +208,50 @@ describe Application do
         expect(response.body).to include('Please Signup or Login.')
       end
     end
-  end
+
+    
+    context "get '/account" do
+      it "routes to account page correctly" do
+        post('/login', email: "bezel@gmail.com", password:'666') #this line not needed?
+        response = get('/account')
+        expect(response.status).to eq 200
+        expect(response.body).to include("My Account")
+      end 
+      
+      it "returns array of requests by requesterid" do
+        post('/login', email: "anna@gmail.com", password:'1234')
+        response = get('/account')
+        expect(response.status).to eq 200
+        expect(response.body).to include("2023-04-01")
+        expect(response.body).to include("Dark Satanic Mills")
+      end
+      
+      it "returns requests for the logged in users' properties with requester name" do
+        post('/login', email: "bezel@gmail.com", password:'666')
+        response = get('/account')
+        expect(response.status).to eq 200
+        expect(response.body).to include "anna@gmail.com"
+      end
+    end
+
+    context "when logged in user can approve a request" do
+      it "post /approve_request turns one to true" do
+        post('/login', email: "bezel@gmail.com", password:'666')
+        post('/approve_request', date_list_id: "6", requester_id: "3")
+        response = get('/account')
+        expect(response.status).to eq 200
+        expect(response.body).to include "Booked Status t"
+      end
+
+      it "post /approve_request turns the one true back to false" do
+        post('/login', email: "bezel@gmail.com", password:'666')
+        post('/approve_request', date_list_id: "7", requester_id: "1")
+        post('/approve_request', date_list_id: "7", requester_id: "1")
+        response = get('/account')
+        expect(response.status).to eq 200
+        expect(response.body).to include "f" #TODO make a not include test work
+      end
+
+    end
 
 end

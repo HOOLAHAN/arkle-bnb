@@ -15,7 +15,7 @@ class DatesListRepository
     end
   end
 
-  def find_by_date_list_id(date_list_id)
+  def find_by_date_list_id_as_object(date_list_id)
     sql = 'SELECT * FROM dates_list WHERE id = $1'
     params = [date_list_id]
 
@@ -53,11 +53,25 @@ class DatesListRepository
     end
     dates_list
   end
-
+  
   def find_by_listing_dates(listing_id)
     results = find_by_listing(listing_id)
     date_array = []
     results.each { |date| date_array << date['date'] }
     date_array
   end
+
+  
+  def update_booked_status(date_list_id, status, booker_id)
+    sql = "update dates_list set booked_status = $2, booker_id = $3 where id = $1"
+    results = DatabaseConnection.exec_params(sql,[date_list_id, status, booker_id])
+  end
+
+  def find_by_date_list_id(date_list_id)
+    sql = "select * from dates_list where id = $1"
+    return DatabaseConnection.exec_params(sql,[date_list_id])
+  end
+
+  
+
 end
