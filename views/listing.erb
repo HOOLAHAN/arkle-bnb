@@ -25,6 +25,7 @@
         <p class="listing listing__night_price">
           £<%= @listing.night_price.to_i/100 %>.00
         </p>
+
         <div class="form__container">
           <form
             class="form"
@@ -39,6 +40,15 @@
               value="Request"
             />
           </form>
+        </div>
+
+        <div class="container__listings">
+          <ul class="list">
+            <% @dates_list.each do |date| %>
+            <% next if date.booked_status == "t"  %>
+              <li class="list__item"><%= date.date %></li>
+            <% end %>
+          </ul>
         </div>
       </section>
     </header>

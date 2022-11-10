@@ -79,6 +79,9 @@ describe Application do
       response = get('/listings/1')
       expect(response.status).to eq(200)
       expect(response.body).to include('ShittyShack')
+      expect(response.body).to include('2023-01-20')
+      expect(response.body).to include('2023-01-21')
+      expect(response.body).not_to include('2023-01-23')
     end
   end
 
