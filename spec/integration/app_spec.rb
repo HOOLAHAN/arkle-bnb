@@ -194,7 +194,18 @@ describe Application do
         response = get('/account')
         expect(response.status).to eq 200
         expect(response.body).to include "anna@gmail.com"
-
       end
     end
+
+    context "when logged in user can approve a request" do
+      it "post /approve_request" do
+        post('/login', email: "bezel@gmail.com", password:'666')
+        post('/approve_request', date_list_id: "6", requester_id: "3")
+        response = get('/account')
+        expect(response.status).to eq 200
+        expect(response.body).to include "Booked Status t"
+      end
+    end
+
+
 end
