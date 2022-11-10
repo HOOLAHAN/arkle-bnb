@@ -110,6 +110,13 @@ describe Application do
 
       expect(response.status).to eq 400
     end
+
+    it " should return error and status 400 when attempting to request an already booked listing " do
+      post('/login', email: 'anna@gmail.com', password: '1234')
+      response = post('book_a_night/1', date: '2023-01-23')
+
+      expect(response.status).to eq 400
+    end
   end
 
   context 'Get /welcome' do

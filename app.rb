@@ -102,6 +102,11 @@ class Application < Sinatra::Base
     return erb(:listings)
   end
 
+  # Prevent requesting an already booked listing
+    # check if request is valid?
+    # check in sql if booked_status is true
+    # if booked_status is true, throw error else make booking
+
   post '/book_a_night/:listing_id' do
     repo = DatesListRepository.new
     listing_id = params[:listing_id]
@@ -112,12 +117,13 @@ class Application < Sinatra::Base
         @date_list_id = date_list.id
         break
       end
+      @date_list_booked = dates_list.find_by_date_list_id(@date_list_id).booked_status
+      #TODO!!!
     end
-    if @date_list_id.nil?
+    if @date_list_id.nil? #|| @date_list_booked == true
       status 400
       return 'error'
     else
-      # CREATE THE REQUEST
       request_repo = RequestsRepository.new
       request = Request.new
       request.user_id = session[:user_id]

@@ -15,6 +15,22 @@ class DatesListRepository
     end
   end
 
+  def find_by_date_list_id(date_list_id)
+    sql = 'SELECT * FROM dates_list WHERE id = $1'
+    params = [date_list_id]
+
+    result = DatabaseConnection.exec_params(sql, params)
+    
+    date_list = DateList.new
+    date_list.id = result[0]["id"]
+    date_list.listing_id = result[0]["listing_id"]
+    date_list.date = result[0]["date"]
+    date_list.booked_status = result[0]["booked_status"]
+    date_list.booker_id = result[0]["booker_id"]
+
+    date_list
+  end
+  
   def find_by_listing(listing_id)
     sql = 'select * from dates_list where listing_id = $1'
     DatabaseConnection.exec_params(sql, [listing_id])
