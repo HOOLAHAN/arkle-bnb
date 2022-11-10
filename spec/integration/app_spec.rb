@@ -217,7 +217,7 @@ describe Application do
     
     context "get '/account" do
       it "routes to account page correctly" do
-        post('/login', email: "bezel@gmail.com", password:'666') #this line not needed?
+        post('/login', email: "bezel@mailinator.com", password:'666') #this line not needed?
         response = get('/account')
         expect(response.status).to eq 200
         expect(response.body).to include("My Account")
@@ -232,7 +232,7 @@ describe Application do
       end
       
       it "returns requests for the logged in users' properties with requester name" do
-        post('/login', email: "bezel@gmail.com", password:'666')
+        post('/login', email: "bezel@mailinator.com", password:'666')
         response = get('/account')
         expect(response.status).to eq 200
         expect(response.body).to include "anna@gmail.com"
@@ -241,7 +241,7 @@ describe Application do
 
     context "when logged in user can approve a request" do
       it "post /approve_request turns one to true" do
-        post('/login', email: "bezel@gmail.com", password:'666')
+        post('/login', email: "bezel@mailinator.com", password:'666')
         post('/approve_request', date_list_id: "6", requester_id: "3")
         response = get('/account')
         expect(response.status).to eq 200
@@ -249,7 +249,7 @@ describe Application do
       end
 
       it "post /approve_request turns the one true back to false" do
-        post('/login', email: "bezel@gmail.com", password:'666')
+        post('/login', email: "bezel@mailinator.com", password:'666')
         post('/approve_request', date_list_id: "7", requester_id: "1")
         post('/approve_request', date_list_id: "7", requester_id: "1")
         response = get('/account')

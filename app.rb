@@ -8,6 +8,8 @@ require './lib/dates_list_repository'
 require './lib/requests_repository'
 require 'user_repository'
 require 'requests_repository'
+require 'sendgrid-ruby'
+include SendGrid
 
 DatabaseConnection.connect('bnb_test')
 
@@ -39,6 +41,20 @@ class Application < Sinatra::Base
     return erb(:login)
   end
 
+  def send_email(to_address, email_subject, email_content)
+    from = SendGrid::Email.new(email: 'arklebnb@gmail.com')
+    to = SendGrid::Email.new(email: to_address)
+    content = SendGrid::Content.new(type: 'text/plain', value: email_content)
+    mail = SendGrid::Mail.new(from, email_subject, to, content)
+
+    sg = SendGrid::API.new(api_key: ENV['SENDGRID_API_KEY'])
+    response = sg.client.mail._('send').post(request_body: mail.to_json)
+    puts response.status_code
+    puts response.body
+    puts response.parsed_body
+    puts response.headers
+  end
+  
   post '/signup' do
     new_user = User.new
     new_user.name = params[:name]
@@ -50,6 +66,11 @@ class Application < Sinatra::Base
     session[:email] = new_user.email
     session[:user_id] = new_user.id
     @user = session[:name]
+
+    #send_email('arklebnb@gmail.com', 'bezel@mailinator.com', 'testing', 'content')
+
+    send_email(new_user.email, 'Signup Successful!', "Thank you, #{new_user.name} for signing up to ArkleBnB")
+
     return erb(:menu_page)
   end
 
@@ -93,6 +114,7 @@ class Application < Sinatra::Base
     new_id = listing.create(@new_listing)
 
     dateslist = DatesListRepository.new.add_dates(new_id, params[:start_date], params[:end_date])
+    send_email(session[:email], 'Listing Successful!', "Thank you, #{session[:name]} for listing #{@new_listing.name} on ArkleBnb")
 
     return erb(:create_listing)
   end
@@ -135,6 +157,7 @@ class Application < Sinatra::Base
       request.user_id = session[:user_id]
       request.date_list_id = @date_list_id
       request_repo.create(request)
+      send_email(session[:email], 'Request made!', "Hello, #{session[:name]}, your request to book a listing on ArkleBnb")
 
       return erb(:booking_requested)
     end
@@ -167,5 +190,10 @@ class Application < Sinatra::Base
     end
       datelistrepo.update_booked_status(params[:date_list_id], newstatus, newbooker)
     redirect ('/account')
-    end
+  end
 end
+
+
+#TODO
+  # Write email queries for request approved, request denied, someone has requested to book your property.
+  # Make Twilio work.
