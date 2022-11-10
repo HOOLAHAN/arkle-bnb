@@ -76,7 +76,7 @@ describe Application do
     it 'should return the HTML content for requesting an individual listing' do
       response = get('/listings/1')
       expect(response.status).to eq(200)
-      expect(response.body).to include('ShittyShack')
+      expect(response.body).to include('MuddyShack')
     end
   end
 
