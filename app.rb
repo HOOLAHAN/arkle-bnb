@@ -6,6 +6,7 @@ require './lib/listing'
 require './lib/listing_repository'
 require './lib/dates_list_repository'
 require 'user_repository'
+require 'requests_repository'
 
 DatabaseConnection.connect('bnb_test')
 
@@ -113,4 +114,24 @@ class Application < Sinatra::Base
 
     return erb(:listing)
   end
+
+  get '/account' do 
+    requestrepo = RequestsRepository.new 
+    @requests = requestrepo.find_requests_by_requester_user_id(session[:user_id])
+    @booking_requests = requestrepo.find_requests_by_listing_user_id(session[:user_id])
+    return erb(:account)
+  end
+
+  post '/approve_request' do
+    datelistrepo = DatesListRepository.new
+    if datelistrepo.find_by_date_list_id(params[:date_list_id])[0]['booked_status'] == 'f' 
+      newstatus = 'TRUE'
+      newbooker = params[:requester_id]
+    else
+      newstatus = 'FALSE'
+      newbooker = '0'
+    end
+      datelistrepo.update_booked_status(params[:date_list_id], newstatus, newbooker)
+    redirect ('/account')
+    end
 end

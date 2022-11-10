@@ -17,6 +17,9 @@
         <div class="links__container">
           <a class="link" href="#">Login</a>
           <a class="link" href="#">Sign Up</a>
+          <% if session[:user_id] != nil %>
+          <a class="link" href="/account">My Account</a>
+          <% end %>
         </div>
       </nav>
       <section class="blurb">

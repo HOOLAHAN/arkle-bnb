@@ -1,5 +1,5 @@
-require_relative '../lib/listing_repository'
-require_relative '../lib/listing'
+require_relative '../../lib/listing_repository'
+require_relative '../../lib/listing'
 
 def reset_tables
   seed_sql = File.read('spec/seeds/bnb_reseeds.sql')
@@ -19,7 +19,7 @@ describe ListingRepository do
 
       expect(listings.length).to eq 3
       expect(listings[0].user_id).to eq 1
-      expect(listings[0].name).to eq 'ShittyShack'
+      expect(listings[0].name).to eq 'MuddyShack'
       expect(listings[0].description).to eq 'A surprisingly nice place to spend 10 minutes'
       expect(listings[0].night_price).to eq 10_000
     end
@@ -31,7 +31,7 @@ describe ListingRepository do
       listing = repo.find(1)
 
       expect(listing.id).to eq 1
-      expect(listing.name).to eq 'ShittyShack'
+      expect(listing.name).to eq 'MuddyShack'
       expect(listing.description).to eq 'A surprisingly nice place to spend 10 minutes'
       expect(listing.night_price).to eq 10_000
     end
