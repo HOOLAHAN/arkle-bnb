@@ -132,5 +132,6 @@ class Application < Sinatra::Base
       newbooker = '0'
     end
       datelistrepo.update_booked_status(params[:date_list_id], newstatus, newbooker)
-  end
+    redirect ('/account')
+    end
 end

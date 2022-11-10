@@ -47,9 +47,18 @@
           <div class="request request__description"><%= request['date_requested'] %></div>
           <div class="request request__night_price"><%= request['requester_name'] %></div>
           <div class="request request__description"><%= request['requester_email'] %></div>
-          <div class="request request__description">Booked Status <%= request['booked_status'] %>
-        </li>
-
+          <% if request['booked_status'] == 't' %>
+            <% new_var = "Approved" %>
+          <% else %>
+            <% new_var = "Awaiting Approval" %>
+          <% end %>
+          <div class="request request__description">Booked Status = <%= new_var %>
+          <form action="/approve_request" method="POST">
+            <input type="hidden" name="date_list_id" value="<%= request['date_list_id'] %>" />
+            <input type="hidden" name="requester_id" value="<%= request['requester_id'] %>" />
+            <input form__submit" type="submit" value="Approve/Deny" />
+          </form>
+         </li>
       <% end %>
     </ul>
     </header>
