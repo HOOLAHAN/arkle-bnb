@@ -198,13 +198,23 @@ describe Application do
     end
 
     context "when logged in user can approve a request" do
-      it "post /approve_request" do
+      xit "post /approve_request turns one to true" do
         post('/login', email: "bezel@gmail.com", password:'666')
         post('/approve_request', date_list_id: "6", requester_id: "3")
         response = get('/account')
         expect(response.status).to eq 200
         expect(response.body).to include "Booked Status t"
       end
+
+      it "post /approve_request turns the one true back to false" do
+        post('/login', email: "bezel@gmail.com", password:'666')
+        post('/approve_request', date_list_id: "7", requester_id: "1")
+        post('/approve_request', date_list_id: "7", requester_id: "1")
+        response = get('/account')
+        expect(response.status).to eq 200
+        expect(response.body).to include "f" #TODO make a not include test work
+      end
+
     end
 
 

@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/iainhoolahan/Projects/makersbnb-ruby-seed/spec/integration/app_spec.rb": {
+      "/Users/Robin/projects/makersbnb-ruby-seed/spec/integration/app_spec.rb": {
         "lines": [
           1,
           1,
@@ -204,11 +204,21 @@
           null,
           1,
           1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          null,
           1,
           1,
           1,
           1,
           1,
+          1,
+          1,
+          null,
           null,
           null,
           null,
@@ -216,7 +226,7 @@
           null
         ]
       },
-      "/Users/iainhoolahan/Projects/makersbnb-ruby-seed/app.rb": {
+      "/Users/Robin/projects/makersbnb-ruby-seed/app.rb": {
         "lines": [
           1,
           1,
@@ -341,17 +351,29 @@
           4,
           4,
           null,
+          null,
+          1,
+          2,
+          2,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          2,
+          null,
           null
         ]
       },
-      "/Users/iainhoolahan/Projects/makersbnb-ruby-seed/lib/listing.rb": {
+      "/Users/Robin/projects/makersbnb-ruby-seed/lib/listing.rb": {
         "lines": [
           1,
           1,
           null
         ]
       },
-      "/Users/iainhoolahan/Projects/makersbnb-ruby-seed/lib/listing_repository.rb": {
+      "/Users/Robin/projects/makersbnb-ruby-seed/lib/listing_repository.rb": {
         "lines": [
           1,
           null,
@@ -403,7 +425,7 @@
           null
         ]
       },
-      "/Users/iainhoolahan/Projects/makersbnb-ruby-seed/lib/dates_list_repository.rb": {
+      "/Users/Robin/projects/makersbnb-ruby-seed/lib/dates_list_repository.rb": {
         "lines": [
           null,
           null,
@@ -436,10 +458,22 @@
           2,
           null,
           null,
+          1,
+          3,
+          3,
+          null,
+          null,
+          1,
+          4,
+          4,
+          null,
+          null,
+          null,
+          null,
           null
         ]
       },
-      "/Users/iainhoolahan/Projects/makersbnb-ruby-seed/lib/user_repository.rb": {
+      "/Users/Robin/projects/makersbnb-ruby-seed/lib/user_repository.rb": {
         "lines": [
           1,
           1,
@@ -473,7 +507,7 @@
           null
         ]
       },
-      "/Users/iainhoolahan/Projects/makersbnb-ruby-seed/lib/requests_repository.rb": {
+      "/Users/Robin/projects/makersbnb-ruby-seed/lib/requests_repository.rb": {
         "lines": [
           1,
           1,
@@ -508,29 +542,38 @@
           null
         ]
       },
-      "/Users/iainhoolahan/Projects/makersbnb-ruby-seed/spec/unit/dates_list_repository_spec.rb": {
+      "/Users/Robin/projects/makersbnb-ruby-seed/spec/unit/dates_list_repository_spec.rb": {
         "lines": [
           1,
           null,
           1,
           1,
-          3,
-          3,
-          3,
+          5,
+          5,
+          5,
           null,
           null,
           null,
           1,
-          3,
+          5,
           null,
           null,
-          4,
+          6,
           null,
           1,
           1,
           1,
           null,
           null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
           1,
           1,
           null,
@@ -543,7 +586,7 @@
           null
         ]
       },
-      "/Users/iainhoolahan/Projects/makersbnb-ruby-seed/spec/unit/listing_repository_spec.rb": {
+      "/Users/Robin/projects/makersbnb-ruby-seed/spec/unit/listing_repository_spec.rb": {
         "lines": [
           1,
           1,
@@ -607,7 +650,7 @@
           null
         ]
       },
-      "/Users/iainhoolahan/Projects/makersbnb-ruby-seed/spec/unit/requests_repository_spec.rb": {
+      "/Users/Robin/projects/makersbnb-ruby-seed/spec/unit/requests_repository_spec.rb": {
         "lines": [
           1,
           null,
@@ -642,7 +685,7 @@
           null
         ]
       },
-      "/Users/iainhoolahan/Projects/makersbnb-ruby-seed/spec/unit/user_repository_spec.rb": {
+      "/Users/Robin/projects/makersbnb-ruby-seed/spec/unit/user_repository_spec.rb": {
         "lines": [
           1,
           null,
@@ -683,6 +726,6 @@
         ]
       }
     },
-    "timestamp": 1668082854
+    "timestamp": 1668090010
   }
 }

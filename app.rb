@@ -121,4 +121,16 @@ class Application < Sinatra::Base
     @booking_requests = requestrepo.find_requests_by_listing_user_id(session[:user_id])
     return erb(:account)
   end
+
+  post '/approve_request' do
+    datelistrepo = DatesListRepository.new
+    if datelistrepo.find_by_date_list_id(params[:date_list_id])[0]['booked_status'] == 'f' 
+      newstatus = 'TRUE'
+      newbooker = params[:requester_id]
+    else
+      newstatus = 'FALSE'
+      newbooker = '0'
+    end
+      datelistrepo.update_booked_status(params[:date_list_id], newstatus, newbooker)
+  end
 end
