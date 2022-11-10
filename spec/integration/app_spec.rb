@@ -102,6 +102,7 @@ describe Application do
       response = post('/book_a_night/3', date: '2000-01-01')
 
       expect(response.status).to eq 400
+      
     end
 
     it 'should return error and status 400 when invalid pairing' do
@@ -203,4 +204,5 @@ describe Application do
       end
     end
   end
+
 end

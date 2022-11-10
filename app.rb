@@ -17,6 +17,7 @@ class Application < Sinatra::Base
 
   enable :sessions
 
+
   get '/' do
     if session[:name].nil?
       return erb(:welcome)
@@ -117,12 +118,14 @@ class Application < Sinatra::Base
         @date_list_id = date_list.id
         break
       end
-      @date_list_booked = dates_list.find_by_date_list_id(@date_list_id).booked_status
-      #TODO!!!
     end
-    if @date_list_id.nil? #|| @date_list_booked == true
+    
+    if @date_list_id.nil?
       status 400
-      return 'error'
+      return 'error listing not available'
+    elsif repo.find_by_date_list_id(@date_list_id).booked_status == 't'
+      status 400
+      return 'error listing already booked'
     else
       request_repo = RequestsRepository.new
       request = Request.new
