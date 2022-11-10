@@ -40,6 +40,16 @@
         </a>
         <% end %>
       </ul>
+      <ul class="list">
+      <% @booking_requests.each do |request| %>
+        <li class="list__item">
+          <div class="request request__name"><%= request['listing_name'] %></div>
+          <div class="request request__description"><%= request['date_requested'] %></div>
+          <div class="request request__night_price"><%= request['requester_name'] %></div>
+          <div class="request request__description"><%= request['requester_email'] %>
+        </li>
+      <% end %>
+    </ul>
     </header>
   </body>
 </html>
