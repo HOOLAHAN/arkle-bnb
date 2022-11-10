@@ -9,20 +9,20 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   </head>
   <body>
     <header>
       <nav>
-        <a href="/"><img class="logo" src="/shack.png" alt="logo" /></a>
         <div class="links__container">
-          <a class="link" href="/login">Login</a>
-          <a class="link" href="/signup">SignUp</a>
+          <a class="link" href="#">Login</a>
+          <a class="link" href="#">Sign Up</a>
         </div>
       </nav>
       <section class="blurb">
-        <h1 class="blurb__header">Welcome!</h1>
-        <p class="blurb__text">Please Signup or Login.</p>
+        <h1 class="blurb__header">Booking Error</h1>
+        <p class="listing listing__description"><%= @error %></p>
+        <a class="link" href="/listings/<%= @listing_id %>">Go back</a>
       </section>
     </header>
   </body>

@@ -13,23 +13,43 @@
   <body>
     <header>
       <nav>
-        <p>[ARKLE BNB]</p>
+        <a href="/"><img class="logo" src="/shack.png" alt="logo" /></a>
         <div class="links__container">
-          <a class="link" href="#">Login</a>
-          <a class="link" href="#">Sign Up</a>
+          <a class="link nav__link" href="#">Login</a>
+          <a class="link nav__link" href="#">Sign Up</a>
         </div>
       </nav>
       <section class="blurb">
         <h1 class="blurb__header"><%= @listing.name %></h1>
         <p class="listing listing__description"><%= @listing.description %></p>
-        <p class="listing listing__night_price">£<%= @listing.night_price.to_i/100 %>.00</p>
+        <p class="listing listing__night_price">
+          £<%= @listing.night_price.to_i/100 %>.00
+        </p>
+
         <div class="form__container">
-        <form class="form" action="/book_a_night" method="POST">
-          <label class="form__label" for="date_list_id">Date</label
-          ><input class="form__input" type="date" name="date_list_id" />
-          <input class="form__input form__submit" type="submit" value="Request" />
-        </form>
-      </div>
+          <form
+            class="form"
+            action="/book_a_night/<%= @listing.id %>"
+            method="POST"
+          >
+            <label class="form__label" for="date_list_id">Date</label
+            ><input class="form__input" type="date" name="date" />
+            <input
+              class="form__input form__submit"
+              type="submit"
+              value="Request"
+            />
+          </form>
+        </div>
+
+        <div class="container__listings">
+          <ul class="list">
+            <% @dates_list.each do |date| %> <% next if date.booked_status ==
+            "t" %>
+            <li class="list__item"><%= date.date %></li>
+            <% end %>
+          </ul>
+        </div>
       </section>
     </header>
   </body>

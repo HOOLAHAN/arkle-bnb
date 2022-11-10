@@ -1,8 +1,29 @@
 class Request
-    attr_accessor :id, :user_id, :user_name, :date_list_id, :listing_id, :listing_name, :date
+
+  attr_accessor :id, :user_id, :date_list_id
 end
 
 class RequestsRepository
+  def all
+    sql = 'SELECT * FROM requests'
+    response_array = DatabaseConnection.exec_params(sql, [])
+
+    requests = []
+    response_array.each do |record|
+      request = Request.new
+      request.user_id = record['user_id']
+      request.date_list_id = record['date_list_id']
+
+      requests << request
+    end
+    requests
+  end
+  
+  def create(request)
+    sql = 'INSERT INTO requests (user_id, date_list_id) VALUES($1, $2)'
+    sql_params = [request.user_id, request.date_list_id]
+    DatabaseConnection.exec_params(sql, sql_params)
+  end
 
     def find_requests_by_requester_user_id(user_id)
         sql = "select * from requests inner join dates_list on requests.date_list_id = dates_list.id inner join listings on dates_list.listing_id = listings.id where requests.user_id = $1"
@@ -27,5 +48,4 @@ class RequestsRepository
         DatabaseConnection.exec_params('drop table if exists transient', [])
         return requests
     end
-
 end

@@ -26,7 +26,7 @@ describe Application do
       expect(response.status).to eq(200)
       expect(response.body).to include('class="link" href="/login"')
     end
-    it "returns alternate home when logged in" do
+    it 'returns alternate home when logged in' do
       post('/login', email: 'anna@gmail.com', password: '1234')
       response = get('/')
       expect(response.status).to eq(200)
@@ -52,23 +52,26 @@ describe Application do
 
   context 'POST /listings' do
     it 'should return the form which generates a new listing' do
-      response = post('/listings', name: 'Palacial Pad', description: 'A heavenly way to get away, no way!', night_price: 50000, start_date: '2027-01-01', end_date: '2027-02-01')
-      expect(response.status).to eq (200)
+      response = post('/listings', name: 'Palacial Pad', description: 'A heavenly way to get away, no way!',
+                                   night_price: 50_000, start_date: '2027-01-01', end_date: '2027-02-01')
+      expect(response.status).to eq(200)
     end
-    
+
     it 'should populate with user_id information' do
       post('/login', email: 'anna@gmail.com', password: '1234')
-      response = post('/listings', name: 'Palacial Pad', description: 'A heavenly way to get away, no way!', night_price: 50000, start_date: '2027-01-01', end_date: '2027-02-01')
+      response = post('/listings', name: 'Palacial Pad', description: 'A heavenly way to get away, no way!',
+                                   night_price: 50_000, start_date: '2027-01-01', end_date: '2027-02-01')
       expect(response.status).to eq 200
       expect(ListingRepository.new.find('4').user_id).to eq 1
     end
-    
+
     it 'should take start and end date from 2x fields' do
       post('/login', email: 'thehoax@gmail.com', password: 'unbelievable')
-      post('/listings', name: 'Trump tower', description: 'I will be back', night_price: 250000, start_date: '2023-01-03', end_date: '2023-02-03')
-      expect(DatesListRepository.new.find_by_listing('4')[0]['date']).to include ('2023-01-03') 
-      # expect(DatesListRepository.new.find_by_listing('4')['date']).to include ('2023-02-03') 
-      # expect(DatesListRepository.new.find_by_listing('4')['date']).to include ('2023-01-20') 
+      post('/listings', name: 'Trump tower', description: 'I will be back', night_price: 250_000,
+                        start_date: '2023-01-03', end_date: '2023-02-03')
+      expect(DatesListRepository.new.find_by_listing('4')[0]['date']).to include('2023-01-03')
+      # expect(DatesListRepository.new.find_by_listing('4')['date']).to include ('2023-02-03')
+      # expect(DatesListRepository.new.find_by_listing('4')['date']).to include ('2023-01-20')
     end
   end
 
@@ -76,15 +79,53 @@ describe Application do
     it 'should return the HTML content for requesting an individual listing' do
       response = get('/listings/1')
       expect(response.status).to eq(200)
+
+
+      expect(response.body).to include('2023-01-20')
+      expect(response.body).to include('2023-01-21')
+      expect(response.body).not_to include('2023-01-23')
       expect(response.body).to include('MuddyShack')
+
     end
   end
 
-  context 'POST /book_a_night/1' do
-    xit 'should return the form which generates a booking request' do
-      response = post('/book_a_night/1', date_list_id: 1)
+  context 'POST /book_a_night' do
+    it 'should return the form which generates a booking request' do
+      post('/login', email: 'anna@gmail.com', password: '1234')
+      response = post('/book_a_night/3', date: '2023-02-02') # selecting dates_list_id 9
       expect(response.status).to eq(200)
-      expect(response.body).to include('?')
+      response = RequestsRepository.new.all
+      expect(response.length).to eq 9
+    end
+
+    it 'should return the form which generates a booking request' do
+      post('/login', email: 'anna@gmail.com', password: '1234')
+      response = post('/book_a_night/3', date: '2023-02-02') # selecting dates_list_id 9
+      expect(response.body).to include('Request received')
+    end
+
+    it 'should return error and status 400 when invalid date' do
+      post('/login', email: 'anna@gmail.com', password: '1234')
+      response = post('/book_a_night/3', date: '2000-01-01')
+
+      expect(response.status).to eq 400
+      expect(response.body).to include('Listing not available')
+    end
+
+    it 'should return error and status 400 when invalid pairing' do
+      post('/login', email: 'anna@gmail.com', password: '1234')
+      response = post('/book_a_night/3', date: '2023-01-20')
+
+      expect(response.status).to eq 400
+      expect(response.body).to include('Listing not available')
+    end
+
+    it " should return error and status 400 when attempting to request an already booked listing " do
+      post('/login', email: 'anna@gmail.com', password: '1234')
+      response = post('book_a_night/1', date: '2023-01-23')
+
+      expect(response.status).to eq 400
+      expect(response.body).to include('Listing already booked')
     end
   end
 
@@ -132,8 +173,8 @@ describe Application do
       expect(response.body).to include('<input class="form__input" type="email" name="email" />')
       expect(response.body).to include('<input class="form__input" type="password" name="password" />')
 
-      expect(response.body).to include("Welcome back!")
-      expect(response.body).to include("Please enter your details to login to ArkleBnb")
+      expect(response.body).to include('Welcome back!')
+      expect(response.body).to include('Please enter your details to login to ArkleBnb')
     end
   end
 
@@ -142,26 +183,21 @@ describe Application do
     #   response = post('/signup', name: "jeff", email: "jeff@jeffworld.com", password: "mynameajeff")
     #   expect(response.body).to include("Welcome, jeff, you are now logged in!")
     # end
-    it "can sign up a user" do
-      post('/signup', name: "jeff", email: "jeff@jeffworld.com", password: "mynameajeff")
+    it 'can sign up a user' do
+      post('/signup', name: 'jeff', email: 'jeff@jeffworld.com', password: 'mynameajeff')
       repo = UserRepository.new
-      expect(repo.show_all[4]["name"]).to eq "jeff"
+      expect(repo.show_all[4]['name']).to eq 'jeff'
     end
   end
 
-  # context "POST /login" do
-    # it "can show success page" do
-    #   response = post('/login', email: "anna@gmail.com", password:'1234')
-    #   expect(response.status).to eq 200
-    #   expect(response.body).to include "Welcome, Anna, you are now logged in!"
-    # end
-
-    it "returns incorrect password" do
-      response = post('/login', email: "anna@gmail.com", password:'124')
+  context 'POST /login' do
+    it 'returns incorrect password' do
+      response = post('/login', email: 'anna@gmail.com', password: '124')
       expect(response.status).to eq 400
       expect(response.body).to include 'password wrong'
     end
-    
+   
+  end
     
     context "get '/logout' logs you out" do
       it 'logs you out if you click the link' do
@@ -172,6 +208,7 @@ describe Application do
         expect(response.body).to include('Please Signup or Login.')
       end
     end
+
     
     context "get '/account" do
       it "routes to account page correctly" do
@@ -198,7 +235,7 @@ describe Application do
     end
 
     context "when logged in user can approve a request" do
-      xit "post /approve_request turns one to true" do
+      it "post /approve_request turns one to true" do
         post('/login', email: "bezel@gmail.com", password:'666')
         post('/approve_request', date_list_id: "6", requester_id: "3")
         response = get('/account')
@@ -216,6 +253,5 @@ describe Application do
       end
 
     end
-
 
 end

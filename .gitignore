@@ -1,4 +1,2 @@
 .DS_Store
-./coverage/.last_run.json
-./coverage/.resulset.json
-./coverage/index.html
+/coverage

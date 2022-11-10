@@ -5,6 +5,7 @@ require_relative 'lib/database_connection'
 require './lib/listing'
 require './lib/listing_repository'
 require './lib/dates_list_repository'
+require './lib/requests_repository'
 require 'user_repository'
 require 'requests_repository'
 
@@ -16,6 +17,7 @@ class Application < Sinatra::Base
   end
 
   enable :sessions
+
 
   get '/' do
     if session[:name].nil?
@@ -89,9 +91,9 @@ class Application < Sinatra::Base
     @new_listing.night_price = params[:night_price]
 
     new_id = listing.create(@new_listing)
-    
+
     dateslist = DatesListRepository.new.add_dates(new_id, params[:start_date], params[:end_date])
-    
+
     return erb(:create_listing)
   end
 
@@ -101,16 +103,48 @@ class Application < Sinatra::Base
 
     return erb(:listings)
   end
- 
+
+  # Prevent requesting an already booked listing
+    # check if request is valid?
+    # check in sql if booked_status is true
+    # if booked_status is true, throw error else make booking
+
   post '/book_a_night/:listing_id' do
     repo = DatesListRepository.new
-    @booking_request = repo.find_by_listing_dates(params[:listing_id])
-    return erb(:booking_requested)
+    @listing_id = params[:listing_id]
+    dates_list = repo.find_by_listing_as_objects(@listing_id)
+
+    dates_list.each do |date_list|
+      if params[:date] == date_list.date
+        @date_list_id = date_list.id
+        break
+      end
+    end
+    
+    if @date_list_id.nil?
+      status 400
+      @error = 'Listing not available'
+      return erb(:booking_error)
+    elsif repo.find_by_date_list_id(@date_list_id).booked_status == 't'
+      status 400
+      @error = 'Listing already booked'
+      return erb(:booking_error)
+    else
+      request_repo = RequestsRepository.new
+      request = Request.new
+      request.user_id = session[:user_id]
+      request.date_list_id = @date_list_id
+      request_repo.create(request)
+
+      return erb(:booking_requested)
+    end
   end
 
   get '/listings/:listing_id' do
     repo = ListingRepository.new
-    @listing = repo.find(params[:listing_id])
+    listing_id = params[:listing_id]
+    @listing = repo.find(listing_id)
+    @dates_list = DatesListRepository.new.find_by_listing_as_objects(listing_id)
 
     return erb(:listing)
   end
