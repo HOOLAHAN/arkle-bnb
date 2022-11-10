@@ -90,6 +90,20 @@ describe Application do
       response = RequestsRepository.new.all
       expect(response.length).to eq 9
     end
+
+    it 'should return error and status 400 when invalid date' do
+      post('/login', email: 'anna@gmail.com', password: '1234')
+      response = post('/book_a_night/3', date: '2000-01-01')
+
+      expect(response.status).to eq 400
+    end
+
+    it 'should return error and status 400 when invalid pairing' do
+      post('/login', email: 'anna@gmail.com', password: '1234')
+      response = post('/book_a_night/3', date: '2023-01-20')
+
+      expect(response.status).to eq 400
+    end
   end
 
   context 'Get /welcome' do

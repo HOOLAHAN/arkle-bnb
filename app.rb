@@ -114,6 +114,7 @@ class Application < Sinatra::Base
       end
     end
     if @date_list_id.nil?
+      status 400
       return 'error'
     else
       # CREATE THE REQUEST
