@@ -102,7 +102,7 @@ describe Application do
       response = post('/book_a_night/3', date: '2000-01-01')
 
       expect(response.status).to eq 400
-      
+      expect(response.body).to include('Listing not available')
     end
 
     it 'should return error and status 400 when invalid pairing' do
@@ -110,6 +110,7 @@ describe Application do
       response = post('/book_a_night/3', date: '2023-01-20')
 
       expect(response.status).to eq 400
+      expect(response.body).to include('Listing not available')
     end
 
     it " should return error and status 400 when attempting to request an already booked listing " do
@@ -117,6 +118,7 @@ describe Application do
       response = post('book_a_night/1', date: '2023-01-23')
 
       expect(response.status).to eq 400
+      expect(response.body).to include('Listing already booked')
     end
   end
 

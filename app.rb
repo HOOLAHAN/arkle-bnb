@@ -110,8 +110,8 @@ class Application < Sinatra::Base
 
   post '/book_a_night/:listing_id' do
     repo = DatesListRepository.new
-    listing_id = params[:listing_id]
-    dates_list = repo.find_by_listing_as_objects(listing_id)
+    @listing_id = params[:listing_id]
+    dates_list = repo.find_by_listing_as_objects(@listing_id)
 
     dates_list.each do |date_list|
       if params[:date] == date_list.date
@@ -122,10 +122,12 @@ class Application < Sinatra::Base
     
     if @date_list_id.nil?
       status 400
-      return 'error listing not available'
+      @error = 'Listing not available'
+      return erb(:booking_error)
     elsif repo.find_by_date_list_id(@date_list_id).booked_status == 't'
       status 400
-      return 'error listing already booked'
+      @error = 'Listing already booked'
+      return erb(:booking_error)
     else
       request_repo = RequestsRepository.new
       request = Request.new
