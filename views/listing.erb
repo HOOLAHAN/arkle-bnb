@@ -13,10 +13,10 @@
   <body>
     <header>
       <nav>
-        <p>[ARKLE BNB]</p>
+        <a href="/"><img class="logo" src="/shack.png" alt="logo" /></a>
         <div class="links__container">
-          <a class="link" href="#">Login</a>
-          <a class="link" href="#">Sign Up</a>
+          <a class="link nav__link" href="#">Login</a>
+          <a class="link nav__link" href="#">Sign Up</a>
         </div>
       </nav>
       <section class="blurb">
@@ -44,9 +44,9 @@
 
         <div class="container__listings">
           <ul class="list">
-            <% @dates_list.each do |date| %>
-            <% next if date.booked_status == "t"  %>
-              <li class="list__item"><%= date.date %></li>
+            <% @dates_list.each do |date| %> <% next if date.booked_status ==
+            "t" %>
+            <li class="list__item"><%= date.date %></li>
             <% end %>
           </ul>
         </div>
