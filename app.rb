@@ -55,15 +55,21 @@ class Application < Sinatra::Base
 
   post '/login' do
     new_user = UserRepository.new.find_user_by_email(params[:email])
-    if params[:password] == new_user.password
+    
+    if new_user == "error"
+      @error = "Email not found"
+      status 400
+      return erb(:login_error)
+    elsif params[:password] == new_user.password
       session[:name] = new_user.name
       session[:email] = new_user.email
       session[:user_id] = new_user.id
       @user = session[:name]
       return erb(:menu_page)
     else
-      status 400
-      return 'password wrong'
+      @error = "Password incorrect"
+      status 401
+      return erb(:login_error)
     end
   end
 
