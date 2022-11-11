@@ -99,7 +99,7 @@ describe Application do
       response = post('/book_a_night/3', date: '2023-02-02') # selecting dates_list_id 9
       expect(response.status).to eq(200)
       response = RequestsRepository.new.all
-      expect(response.length).to eq 11
+      expect(response.length).to eq 18
     end
 
     it 'should return the form which generates a booking request' do
@@ -219,6 +219,8 @@ describe Application do
     end
 
     
+
+    #{"id"=>"1", "user_id"=>"1", "date_list_id"=>"1", "listing_id"=>"1", "date"=>"2023-01-20", "booked_status"=>"f", "booker_id"=>nil, "name"=>"MuddyShack", "description"=>"A surprisingly nice place to spend 10 minutes", "night_price"=>"10000"} 
     context "get '/account" do
       it "routes to account page correctly" do
         post('/login', email: "bezel@gmail.com", password:'666') #this line not needed?

@@ -41,6 +41,13 @@
               <div class="request request__date">
                 <%= @parsed_date = request['date'].split('-').reverse.join(' / ') %>
               </div>
+              <div class="request request__status">
+                <% if @session_id == request['booker_id']  %>
+                  <%= "Request Approved"  %>
+                <% else %>
+                  <%= "Pending Approval" %>
+                <% end%>
+              </div>
             </li>
           <% end %>
         </ul>
