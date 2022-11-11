@@ -1,3 +1,4 @@
 .DS_Store
-/coveragesendgrid.env
+/coverage
+twilio.env
 sendgrid.env
