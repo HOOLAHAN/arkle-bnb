@@ -6,6 +6,7 @@ require './lib/listing'
 require './lib/listing_repository'
 require './lib/dates_list_repository'
 require './lib/requests_repository'
+require './lib/converse_repository'
 require 'user_repository'
 require 'requests_repository'
 
@@ -170,14 +171,23 @@ class Application < Sinatra::Base
   end
 
   get '/my_messages' do
-    #1 show all confirmed bookings as a list (use new sql query but build off other ones, including temp table)
-    #2 enable messaging on these listings with a new box and a send button
+    #0 ADD LINK TO MY_MESSAGES PAGE ON ACCOUNT PAGE
+      # 1 show all confirmed bookings that I've made as a list (use new sql query but build off other ones, including temp table)
+      # 2 show all confirmed bookings that I've received on my listings as a list, with different identifiers
+      # 3 display shortened conversation within the loops above of all relevant messages
+      #4 enable new messaging on these listings with a new box and a send button above message loop
+    #5 add a page for opening and reading the message
+    #6 add message Read/unread data
+    #7 display unread message count
+    #8 open message page on unread message turns it read
+
+    @requester_conf_list = DatesListRepository.new.select_all_confirmed_bookings_by_userid(session[:user_id])
+    @lister_conf_list = DatesListRepository.new.select_all_confirmed_bookings_by_lister_id(session[:user_id])
     return erb(:my_messages)
   end
 
   post '/add_message' do
-    #add new message to converse table
-    #takes relevant id's from loop (like on accounts page) and sends them as hidden query params.
+    convorepo = ConverseRepository.new.add_new_message(params[:receiver_id], params[:sender_id], params[:message_content])
     redirect('/my_messages')
   end
 

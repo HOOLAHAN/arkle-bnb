@@ -48,6 +48,12 @@ RSpec.describe DatesListRepository do
   end
 
   it "selects all of someone logged in's confirmed bookings" do
-    expect(dateslist.select_all_confirmed_bookings_by_userid('4')[0]['id']).to eq ('4')
+    expect(dateslist.select_all_confirmed_bookings_by_userid('4')[0]['date']).to eq ('2023-01-23')
+  end
+
+  it "selects all of someone logged in's confirmed bookings on their listings" do
+    expect(dateslist.select_all_confirmed_bookings_by_lister_id('2')[0]['date_list_id']).to eq ('5')
+    expect(dateslist.select_all_confirmed_bookings_by_lister_id('2')[1]['listing_name']).to eq ('Dark Satanic Mills')
+    expect(dateslist.select_all_confirmed_bookings_by_lister_id('1')[0]['listing_name']).to eq ('MuddyShack')
   end
 end

@@ -14,8 +14,13 @@ RSpec.describe ConverseRepository do
 
   let(:convolist) {ConverseRepository.new}
 
-  it "first test" do
-
+  it "show_all_messages_in_thread correctly shows messages" do
+    expect(convolist.show_all_messages_in_thread('4','1','4','1')[1]['message_content']).to eq ("i hear macdonalds is nice this time of year")
+  end
+  
+  it "adds new message to thread" do
+    convolist.add_new_message('1','4','NEW MESSAGE!!!!')
+    expect(convolist.show_all_messages_in_thread('4','1','4','1')[0]['message_content']).to eq ("NEW MESSAGE!!!!")
   end
 
 end

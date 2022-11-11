@@ -54,11 +54,11 @@ INSERT INTO requests ("user_id", "date_list_id") VALUES
 (2,1),
 (2,2);
 
-INSERT INTO converse ("id", "receiver_user_id", "sender_user_id", "message_time", "message_content", "date_list_id", "listing_name") VALUES
-(1,1,4, '2022-11-10 12:18:57', 'hey, thanks for confirming my booking',4,'MuddyShack'),
-(2,1,4, '2022-11-10 12:19:57', 'what happens with getting the key?',4,'MuddyShack'),
-(3,4,1, '2022-11-10 13:19:57', 'thanks for booking! key will be left under the plant pot',4,'MuddyShack'),
-(4,1,4, '2022-11-10 14:19:57', 'great - you got any good restaurant recommendations?',4,'MuddyShack'),
-(5,4,1, '2022-11-10 15:19:57', 'i hear macdonalds is nice this time of year',4,'MuddyShack'),
-(6,1,4, '2022-11-10 16:19:57', 'is that really the best thing around your way? nothing micheline starred?',4,'MuddyShack');
+INSERT INTO converse ("receiver_user_id", "sender_user_id", "message_time", "message_content", "date_list_id", "listing_name") VALUES
+(1,4, '2022-11-10 12:18:57', 'hey, thanks for confirming my booking',4,'MuddyShack'),
+(1,4, '2022-11-10 12:19:57', 'what happens with getting the key?',4,'MuddyShack'),
+(4,1, '2022-11-10 13:19:57', 'thanks for booking! key will be left under the plant pot',4,'MuddyShack'),
+(1,4, '2022-11-10 14:19:57', 'great - you got any good restaurant recommendations?',4,'MuddyShack'),
+(4,1, '2022-11-10 15:19:57', 'i hear macdonalds is nice this time of year',4,'MuddyShack'),
+(1,4, '2022-11-10 16:19:57', 'is that really the best thing around your way? nothing micheline starred?',4,'MuddyShack');
 
