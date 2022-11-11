@@ -227,7 +227,7 @@ describe Application do
         expect(response.body).to include("My Account")
       end 
       
-      it "returns array of requests by requesterid" do
+      it "returns array of requests by requesterid with status" do
         post('/login', email: "anna@gmail.com", password:'1234')
         response = get('/account')
         expect(response.status).to eq 200
