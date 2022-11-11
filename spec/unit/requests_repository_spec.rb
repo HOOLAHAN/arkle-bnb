@@ -23,23 +23,23 @@ RSpec.describe RequestsRepository do
       request.date_list_id = '2'
 
       repo.create(request)
-      expect(repo.all.length).to eq 11
+      expect(repo.all.length).to eq 18
     end
   end
 
 
   it "find_requests_by_requester_user_id(user_id)" do
     results = requestslist.find_requests_by_requester_user_id('1')
-    expect(results.ntuples).to eq (3)
+    expect(results.ntuples).to eq (4)
     expect(results[0]['date_list_id']).to eq ('24')
     expect(results[1]['date']).to eq ('2023-04-03')
   end
 
   it "find_requests_by_listing_user_id(user_id)" do
     results = requestslist.find_requests_by_listing_user_id('2')
-    expect(results.ntuples).to eq 8
-    expect(results[5]['date_list_id']).to eq ('24')
-    expect(results[5]['requester_email']).to eq ('anna@gmail.com')
+    expect(results.ntuples).to eq 14
+    expect(results[5]['date_list_id']).to eq ('9')
+    expect(results[5]['requester_email']).to eq ('littleh@gmail.com')
   end
 
 end
