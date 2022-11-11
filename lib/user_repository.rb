@@ -18,7 +18,11 @@ class UserRepository
 
   def find_user_by_email(email)
     sql = 'SELECT * FROM users where email = $1'
-    result = DatabaseConnection.exec_params(sql,[email])[0]
+    
+    result_pg = DatabaseConnection.exec_params(sql,[email])
+    return "error" if result_pg.ntuples == 0
+
+    result = result_pg[0]
     user = User.new
     user.name = result['name']
     user.id = result['id']
@@ -27,4 +31,6 @@ class UserRepository
     user
   end
 
+  #  #<PG::Result:0x00007fa4a51d76e8 status=PGRES_TUPLES_OK ntuples=0 nfields=4 cmd_tuples=0> 
+  # #<PG::Result:0x00007f7daa16b050 status=PGRES_TUPLES_OK ntuples=1 nfields=4 cmd_tuples=1>
 end

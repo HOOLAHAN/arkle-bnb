@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Arkle-BnB: Login Error</title>
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="/"><img class="logo" src="/shack.png" alt="logo" /></a>
+        <div class="links__container">
+          <a class="link nav__link" href="/menu_page">Menu</a>
+          <a class="link nav__link" href="/logout">Logout</a>
+          <a class="link nav__link" href="/account">Account</a>
+        </div>
+      </nav>
+      <section class="blurb">
+        <h1 class="blurb__header">Login Error</h1>
+        <p class="listing listing__description"><%= @error %></p>
+        <a
+          class="link menu__link view_listing"
+          href="/login"
+          >Go back</a
+        >
+      </section>
+    </header>
+  </body>
+</html>
