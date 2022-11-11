@@ -29,8 +29,7 @@
         <ul class="list">
           <h3 class="form__header">My Requests</h3>
           <% @requests.each do |request| %>
-           <a href="/requests/<%= request['id'] %>">
-            <li class="list__item">
+            <li class="request__item">
               <div class="request request__name"><%= request['name'] %></div>
               <div class="request request__description">
                 <%= request['description'] %>
@@ -41,7 +40,6 @@
               <div class="request request__date">
                 <%= @parsed_date = request['date'].split('-').reverse.join(' / ') %>
             </li>
-          </a>
           <% end %>
         </ul>
         <ul class="list account__list">
