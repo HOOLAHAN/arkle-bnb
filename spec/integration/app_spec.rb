@@ -260,7 +260,21 @@ describe Application do
         expect(response.status).to eq 200
         expect(response.body).to include "f" #TODO make a not include test work
       end
+    end
+    
+    context "when logged in, get '/my_messages" do
+      it "returns correct page" do
+        post('/login', email: "anna@gmail.com", password:'1234')
+        response = get('/my_messages')
+        expect(response.body).to include('<p class="blurb__text">Below are bookings you have confirmed for your listings:</p>')
+        expect(response.body).to include('2023-02-06')
+        expect(response.body).to include('MuddyShack')
+      end
+    end
 
+    it "post /add message works" do
+      response = post('/add_message')
+      expect(response.status).to eq 302
     end
 
 end

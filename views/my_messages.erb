@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Arkle-BnB</title>
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <p>[ARKLE BNB]</p>
+        <div class="links__container">
+          <a class="link" href="#">Login</a>
+          <a class="link" href="#">Sign Up</a>
+        </div>
+      </nav>
+      <section class="blurb">
+        <h1 class="blurb__header">My Messages</h1>
+        <p class="blurb__text">Here is where you can message people on confirmed bookings</p>
+        <p class="blurb__text">Below are confirmed bookings you have made:</p>
+      <ul class="list">
+        <% @requester_conf_list.each do |request| %>
+          <li class="list__item">
+            <div class="request request__name"><%= request['name'] %></div>
+            <div class="request request__description"><%= request['date'] %></div>
+            <div class="request request__description"><%= request['date'] %></div>
+                <div class="request request__name"> --------------------------- </div>
+            <p> Messages relating to this booking: </p>
+                <div class="request request__name"> ----- </div>
+
+        <form class="form" action="/add_message" method="POST">
+          <label class="form__label" for="name">Post new message</label>
+          <label class="form__label" for="message_content">message_content</label>
+          <input class="form__input" type="text" name="message_content" />
+          <input type="hidden" name="receiver_id" value="<%= request['user_id'] %>" />
+          <input type="hidden" name="sender_id" value="<%= request['booker_id'] %>" />
+          <input class="form__input form__submit" type="submit" value="Send" />
+        </form>
+                <div class="request request__name"> ----- </div>
+            
+            <%@convo = ConverseRepository.new.show_all_messages_in_thread(request['booker_id'],request['user_id'],request['booker_id'],request['user_id'])%>
+            <% if @convo.ntuples == 0%>
+              <% @display = "No messages yet"%>
+              <%= @display%>
+            <%else%>
+               <% @convo.each do |conv|%>
+                <div class="request request__name"><%= conv['message_time'] %></div>
+                <div class="request request__name"><%= conv['message_content'] %></div>
+                <div class="request request__name"> ----- </div>
+               <%end%>
+            <%end%>
+          </li>
+        </a>
+        <% end %>
+      </ul>
+        <p class="blurb__text">Below are bookings you have confirmed for your listings:</p>
+      <ul class="list">
+        <% @lister_conf_list.each do |request| %>
+          <li class="list__item">
+            <div class="request request__name"><%= request['listing_name'] %></div>
+            <div class="request request__description"><%= request['date'] %></div>
+            <div class="request request__name"> --------------------------- </div>
+            <p> Messages relating to this booking: </p>
+                <div class="request request__name"> ----- </div>
+        
+        <form class="form" action="/add_message" method="POST">
+          <label class="form__label" for="name">Post new message</label>
+          <label class="form__label" for="message_content">message_content</label>
+          <input class="form__input" type="text" name="message_content" />
+          <input type="hidden" name="receiver_id" value="<%= request['booker_id'] %>" />
+          <input type="hidden" name="sender_id" value="<%= request['lister_id'] %>" />
+          <input class="form__input form__submit" type="submit" value="Send" />
+        </form>
+        <div class="request request__name"> ----- </div>
+            
+            <%@convo2 = ConverseRepository.new.show_all_messages_in_thread(request['lister_id'],request['booker_id'],request['lister_id'],request['booker_id'])%>
+            <% if @convo2.ntuples == 0%>
+              <% @display = "No messages yet"%>
+              <%= @display%>
+            <%else%>
+               <% @convo2.each do |conv|%>
+                <div class="request request__name"><%= conv['message_time'] %></div>
+                <div class="request request__name"><%= conv['message_content'] %></div>
+                <div class="request request__name"> ----- </div>
+               <%end%>
+            <%end%>
+          </li>
+        </a>
+        <% end %>
+      </ul>
+
+      </section>
+    </header>
+  </body>
+</html>
+
+
+
+
+
+
+
