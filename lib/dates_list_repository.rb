@@ -72,6 +72,16 @@ class DatesListRepository
     return DatabaseConnection.exec_params(sql,[date_list_id])
   end
 
-  
+  def select_all_confirmed_bookings_by_userid(user_id)
+    sql = "select * from dates_list inner join listings on dates_list.listing_id = listings.id where booker_id = $1 and booked_status = TRUE"
+    DatabaseConnection.exec_params(sql,[user_id])
+  end
+
+  def select_all_confirmed_bookings_by_lister_id(user_id)
+    sql = "select dates_list.id as date_list_id, date, booked_status, booker_id, listings.name as listing_name, description, night_price, users.id as lister_id from dates_list inner join listings on dates_list.listing_id = listings.id
+    inner join users on listings.user_id = users.id
+     where users.id = $1 and booked_status = TRUE"
+    DatabaseConnection.exec_params(sql,[user_id])
+  end
 
 end

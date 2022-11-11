@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Arkle-BnB: Welcome</title>
+    <title>Arkle-BnB: Login Error</title>
     <link rel="stylesheet" href="/style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -16,13 +16,19 @@
       <nav>
         <a href="/"><img class="logo" src="/shack.png" alt="logo" /></a>
         <div class="links__container">
-          <a class="link nav__link" href="/login">Login</a>
-          <a class="link nav__link" href="/signup">Sign Up</a>
+          <a class="link nav__link" href="/menu_page">Menu</a>
+          <a class="link nav__link" href="/logout">Logout</a>
+          <a class="link nav__link" href="/account">Account</a>
         </div>
       </nav>
       <section class="blurb">
-        <h1 class="blurb__header">Welcome!</h1>
-        <p class="blurb__text">Please Signup or Login.</p>
+        <h1 class="blurb__header">Login Error</h1>
+        <p class="listing listing__description"><%= @error %></p>
+        <a
+          class="link menu__link view_listing"
+          href="/login"
+          >Go back</a
+        >
       </section>
     </header>
   </body>

@@ -29,13 +29,13 @@ describe Application do
       response = get('/')
 
       expect(response.status).to eq(200)
-      expect(response.body).to include('class="link" href="/login"')
+      expect(response.body).to include('class="link nav__link" href="/login"')
     end
     it 'returns alternate home when logged in' do
       post('/login', email: 'anna@gmail.com', password: '1234')
       response = get('/')
       expect(response.status).to eq(200)
-      expect(response.body).to include('class="link" href="/logout">Logout')
+      expect(response.body).to include('class="link nav__link" href="/logout">Logout')
     end
   end
 
@@ -85,10 +85,9 @@ describe Application do
       response = get('/listings/1')
       expect(response.status).to eq(200)
 
-
-      expect(response.body).to include('2023-01-20')
-      expect(response.body).to include('2023-01-21')
-      expect(response.body).not_to include('2023-01-23')
+      expect(response.body).to include('20 / 01 / 2023')
+      expect(response.body).to include('21 / 01 / 2023')
+      expect(response.body).not_to include('23 / 01 / 2023')
       expect(response.body).to include('MuddyShack')
 
     end
@@ -100,7 +99,7 @@ describe Application do
       response = post('/book_a_night/3', date: '2023-02-02') # selecting dates_list_id 9
       expect(response.status).to eq(200)
       response = RequestsRepository.new.all
-      expect(response.length).to eq 11
+      expect(response.length).to eq 18
     end
 
     it 'should return the form which generates a booking request' do
@@ -142,11 +141,11 @@ describe Application do
 
     it 'should contain some html data' do
       response = get('/welcome')
-      expect(response.body).to include('<title>Arkle-BnB</title>')
+      expect(response.body).to include('<title>Arkle-BnB: Welcome</title>')
       expect(response.body).to include(' <h1 class="blurb__header">Welcome!</h1>')
       expect(response.body).to include('Please Signup or Login.')
-      expect(response.body).to include('<a class="link" href="/signup">SignUp</a>')
-      expect(response.body).to include('<a class="link" href="/login">Login</a>')
+      expect(response.body).to include('<a class="link nav__link" href="/signup">Sign Up</a>')
+      expect(response.body).to include('<a class="link nav__link" href="/login">Login</a>')
     end
   end
 
@@ -198,8 +197,13 @@ describe Application do
   context 'POST /login' do
     it 'returns incorrect password' do
       response = post('/login', email: 'anna@gmail.com', password: '124')
+      expect(response.status).to eq 401
+      expect(response.body).to include 'Password incorrect'
+    end
+    it 'returns Email not found' do
+      response = post('/login', email: 'annaincorrect@gmail.com', password: '124')
       expect(response.status).to eq 400
-      expect(response.body).to include 'password wrong'
+      expect(response.body).to include 'Email not found'
     end
    
   end
@@ -209,12 +213,14 @@ describe Application do
         get('/logout')
         response = get('/')
         expect(response.status).to eq 200
-        expect(response.body).to include('<a class="link" href="/login">Login</a>')
+        expect(response.body).to include('<a class="link nav__link" href="/login">Login</a>')
         expect(response.body).to include('Please Signup or Login.')
       end
     end
 
     
+
+    #{"id"=>"1", "user_id"=>"1", "date_list_id"=>"1", "listing_id"=>"1", "date"=>"2023-01-20", "booked_status"=>"f", "booker_id"=>nil, "name"=>"MuddyShack", "description"=>"A surprisingly nice place to spend 10 minutes", "night_price"=>"10000"} 
     context "get '/account" do
       it "routes to account page correctly" do
         post('/login', email: "bezel@mailinator.com", password:'666') #this line not needed?
@@ -223,11 +229,11 @@ describe Application do
         expect(response.body).to include("My Account")
       end 
       
-      it "returns array of requests by requesterid" do
+      it "returns array of requests by requesterid with status" do
         post('/login', email: "anna@gmail.com", password:'1234')
         response = get('/account')
         expect(response.status).to eq 200
-        expect(response.body).to include("2023-04-01")
+        expect(response.body).to include("01 / 04 / 2023")
         expect(response.body).to include("Dark Satanic Mills")
       end
       
@@ -256,7 +262,21 @@ describe Application do
         expect(response.status).to eq 200
         expect(response.body).to include "f" #TODO make a not include test work
       end
+    end
+    
+    context "when logged in, get '/my_messages" do
+      it "returns correct page" do
+        post('/login', email: "anna@gmail.com", password:'1234')
+        response = get('/my_messages')
+        expect(response.body).to include('<p class="blurb__text">Below are bookings you have confirmed for your listings:</p>')
+        expect(response.body).to include('2023-02-06')
+        expect(response.body).to include('MuddyShack')
+      end
+    end
 
+    it "post /add message works" do
+      response = post('/add_message')
+      expect(response.status).to eq 302
     end
 
 end

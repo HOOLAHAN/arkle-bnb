@@ -8,6 +8,7 @@ require './lib/dates_list_repository'
 require './lib/requests_repository'
 require './lib/user_repository'
 require './lib/text'
+require './lib/converse_repository'
 
 DatabaseConnection.connect('bnb_test')
 
@@ -61,15 +62,21 @@ class Application < Sinatra::Base
 
   post '/login' do
     new_user = UserRepository.new.find_user_by_email(params[:email])
-    if params[:password] == new_user.password
+    
+    if new_user == "error"
+      @error = "Email not found"
+      status 400
+      return erb(:login_error)
+    elsif params[:password] == new_user.password
       session[:name] = new_user.name
       session[:email] = new_user.email
       session[:user_id] = new_user.id
       @user = session[:name]
       return erb(:menu_page)
     else
-      status 400
-      return 'password wrong'
+      @error = "Password incorrect"
+      status 401
+      return erb(:login_error)
     end
   end
 
@@ -167,6 +174,7 @@ class Application < Sinatra::Base
     requestrepo = RequestsRepository.new 
     @requests = requestrepo.find_requests_by_requester_user_id(session[:user_id])
     @booking_requests = requestrepo.find_requests_by_listing_user_id(session[:user_id])
+    @session_id = session[:user_id]
     return erb(:account)
   end
 
@@ -182,6 +190,28 @@ class Application < Sinatra::Base
       datelistrepo.update_booked_status(params[:date_list_id], newstatus, newbooker)
     redirect ('/account')
   end
+
+  get '/my_messages' do
+    #0 ADD LINK TO MY_MESSAGES PAGE ON ACCOUNT PAGE
+      # 1 show all confirmed bookings that I've made as a list (use new sql query but build off other ones, including temp table)
+      # 2 show all confirmed bookings that I've received on my listings as a list, with different identifiers
+      # 3 display shortened conversation within the loops above of all relevant messages
+      #4 enable new messaging on these listings with a new box and a send button above message loop
+    #5 add a page for opening and reading the message
+    #6 add message Read/unread data
+    #7 display unread message count
+    #8 open message page on unread message turns it read
+
+    @requester_conf_list = DatesListRepository.new.select_all_confirmed_bookings_by_userid(session[:user_id])
+    @lister_conf_list = DatesListRepository.new.select_all_confirmed_bookings_by_lister_id(session[:user_id])
+    return erb(:my_messages)
+  end
+
+  post '/add_message' do
+    convorepo = ConverseRepository.new.add_new_message(params[:receiver_id], params[:sender_id], params[:message_content])
+    redirect('/my_messages')
+  end
+
 
 end
 
