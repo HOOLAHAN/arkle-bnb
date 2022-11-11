@@ -4,7 +4,7 @@ TRUNCATE TABLE users, listings, dates_list, requests, converse RESTART IDENTITY;
 
 INSERT INTO users ("name", "email", "password") VALUES 
 ('Anna', 'anna@gmail.com', '1234'),
-('Beelzebub', 'bezel@gmail.com', '666'),
+('Beelzebub', 'bezel@mailinator.com', '666'),
 ('Qanon', 'thehoax@gmail.com', 'unbelievable'),
 ('Harriet', 'littleh@gmail.com', 'password'); 
 

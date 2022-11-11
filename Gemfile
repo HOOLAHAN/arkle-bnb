@@ -17,3 +17,7 @@ gem "rainbow", "~> 3.1"
 gem "simplecov", "~> 0.21.2"
 
 gem "simplecov-console", "~> 0.9.1"
+
+gem 'sendgrid-ruby'
+
+gem "twilio-ruby", "~> 5.73.2"
