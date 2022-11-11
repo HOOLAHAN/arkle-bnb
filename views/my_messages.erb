@@ -9,14 +9,16 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
       rel="stylesheet"
     />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
   </head>
   <body>
     <header>
       <nav>
-        <p>[ARKLE BNB]</p>
+        <a href="/"><img class="logo" src="/shack.png" alt="logo" /></a>
         <div class="links__container">
-          <a class="link" href="#">Login</a>
-          <a class="link" href="#">Sign Up</a>
+          <a class="link nav__link" href="/menu_page">Menu</a>
+          <a class="link nav__link" href="/account">Account</a>
+          <a class="link nav__link" href="/logout">Logout</a>
         </div>
       </nav>
       <section class="blurb">
@@ -25,17 +27,15 @@
         <p class="blurb__text">Below are confirmed bookings you have made:</p>
       <ul class="list">
         <% @requester_conf_list.each do |request| %>
-          <li class="list__item">
+          <li class="request__item">
             <div class="request request__name"><%= request['name'] %></div>
-            <div class="request request__description"><%= request['date'] %></div>
             <div class="request request__description"><%= request['date'] %></div>
                 <div class="request request__name"> --------------------------- </div>
             <p> Messages relating to this booking: </p>
                 <div class="request request__name"> ----- </div>
 
-        <form class="form" action="/add_message" method="POST">
+        <form class="form__msg" action="/add_message" method="POST">
           <label class="form__label" for="name">Post new message</label>
-          <label class="form__label" for="message_content">message_content</label>
           <input class="form__input" type="text" name="message_content" />
           <input type="hidden" name="receiver_id" value="<%= request['user_id'] %>" />
           <input type="hidden" name="sender_id" value="<%= request['booker_id'] %>" />
@@ -59,9 +59,9 @@
         <% end %>
       </ul>
         <p class="blurb__text">Below are bookings you have confirmed for your listings:</p>
-      <ul class="list">
+      <ul class="request__item">
         <% @lister_conf_list.each do |request| %>
-          <li class="list__item">
+          <li class="request__item">
             <div class="request request__name"><%= request['listing_name'] %></div>
             <div class="request request__description"><%= request['date'] %></div>
             <div class="request request__name"> --------------------------- </div>
@@ -70,7 +70,6 @@
         
         <form class="form" action="/add_message" method="POST">
           <label class="form__label" for="name">Post new message</label>
-          <label class="form__label" for="message_content">message_content</label>
           <input class="form__input" type="text" name="message_content" />
           <input type="hidden" name="receiver_id" value="<%= request['booker_id'] %>" />
           <input type="hidden" name="sender_id" value="<%= request['lister_id'] %>" />
