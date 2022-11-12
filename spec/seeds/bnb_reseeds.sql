@@ -52,7 +52,15 @@ INSERT INTO requests ("user_id", "date_list_id") VALUES
 (1,26),
 (1,27),
 (2,1),
-(2,2);
+(2,2),
+(4,4),
+(3,5),
+(1,13),
+(4,20),
+(4,21),
+(4,22),
+(4,23);
+
 
 INSERT INTO converse ("receiver_user_id", "sender_user_id", "message_time", "message_content", "date_list_id", "listing_name") VALUES
 (1,4, '2022-11-10 12:18:57', 'hey, thanks for confirming my booking',4,'MuddyShack'),
