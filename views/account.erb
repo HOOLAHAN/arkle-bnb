@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Arkle-BnB</title>
+    <title>Arkle-BnB: Account</title>
     <link rel="stylesheet" href="/style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -9,58 +9,63 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
       rel="stylesheet"
     />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
   </head>
   <body>
     <header>
       <nav>
-        <p>[ARKLE BNB]</p>
+        <a href="/"><img class="logo" src="/shack.png" alt="logo" /></a>
         <div class="links__container">
-          <a class="link" href="#">Login</a>
-          <a class="link" href="#">Sign Up</a>
+          <a class="link nav__link" href="/menu_page">Menu</a>
+          <a class="link nav__link" href="/logout">Logout</a>
         </div>
       </nav>
       <section class="blurb">
         <h1 class="blurb__header">My Account</h1>
         <p class="blurb__text">Here is where you manage booking requests and account details</p>
       </section>
-      <ul class="list">
-        <% @requests.each do |request| %>
-         <a href="/requests/<%= request['id'] %>">
-          <li class="list__item">
-            <div class="request request__name"><%= request['name'] %></div>
-            <div class="request request__description">
-              <%= request['description'] %>
-            </div>
-            <div class="request request__night_price">
-              £<%= request['night_price'].to_i / 100 %>.00 /night
-            </div>
-            <div class="request request__description">
-            <%= request['date'] %>
-          </li>
-        </a>
-        <% end %>
-      </ul>
-      <ul class="list">
-      <% @booking_requests.each do |request| %>
-        <li class="list__item">
-          <div class="request request__name"><%= request['listing_name'] %></div>
-          <div class="request request__description"><%= request['date_requested'] %></div>
-          <div class="request request__night_price"><%= request['requester_name'] %></div>
-          <div class="request request__description"><%= request['requester_email'] %></div>
-          <% if request['booked_status'] == 't' %>
-            <% new_var = "Approved" %>
-          <% else %>
-            <% new_var = "Awaiting Approval" %>
-          <% end %>
-          <div class="request request__description">Booked Status = <%= new_var %>
-          <form action="/approve_request" method="POST">
-            <input type="hidden" name="date_list_id" value="<%= request['date_list_id'] %>" />
-            <input type="hidden" name="requester_id" value="<%= request['requester_id'] %>" />
-            <input form__submit" type="submit" value="Approve/Deny" />
-          </form>
-         </li>
-      <% end %>
-    </ul>
     </header>
+      <div class="container__account">
+        <ul class="list">
+          <h3 class="form__header">My Requests</h3>
+          <% @requests.each do |request| %>
+            <li class="request__item">
+              <div class="request request__name"><%= request['name'] %></div>
+              <div class="request request__description">
+                <%= request['description'] %>
+              </div>
+              <div class="request request__night_price">
+                £<%= request['night_price'].to_i / 100 %>.00 /night
+              </div>
+              <div class="request request__date">
+                <%= @parsed_date = request['date'].split('-').reverse.join(' / ') %>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+        <ul class="list account__list">
+          <h3 class="form__header">Requests for Approval</h3>
+        <% @booking_requests.each do |request| %>
+        <% @parsed_date = request['date_requested'].split('-').reverse.join(' / ') %>
+          <li class="approval__item">
+            <div class="approval approval__name"><%= request['listing_name'] %></div>
+            <div class="approval approval__date"><%= @parsed_date %></div>
+            <div class="approval approval__name"><%= request['requester_name'] %></div>
+            <div class="approval approval__email"><%= request['requester_email'] %></div>
+            <% if request['booked_status'] == 't' %>
+              <% new_var = "Approved" %>
+            <% else %>
+              <% new_var = "Awaiting Approval" %>
+            <% end %>
+            <div class="approval approval__status">Booked Status = <%= new_var %></div>
+            <form class="approval__form" action="/approve_request" method="POST">
+              <input type="hidden" name="date_list_id" value="<%= request['date_list_id'] %>" />
+              <input type="hidden" name="requester_id" value="<%= request['requester_id'] %>" />
+              <input class="approve_deny" type="submit" value="Approve/Deny" />
+            </form>
+           </li>
+        <% end %>
+        </ul>
+      </div>
   </body>
 </html>

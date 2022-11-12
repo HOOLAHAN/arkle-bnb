@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Arkle-BnB</title>
+    <title>Arkle-BnB: Listing</title>
     <link rel="stylesheet" href="/style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -9,14 +9,16 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
       rel="stylesheet"
     />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
   </head>
   <body>
     <header>
       <nav>
         <a href="/"><img class="logo" src="/shack.png" alt="logo" /></a>
         <div class="links__container">
-          <a class="link nav__link" href="#">Login</a>
-          <a class="link nav__link" href="#">Sign Up</a>
+          <a class="link nav__link" href="/menu_page">Menu</a>
+          <a class="link nav__link" href="/logout">Log out</a>
+          <a class="link nav__link" href="/account">Account</a>
         </div>
       </nav>
       <section class="blurb">
@@ -25,32 +27,32 @@
         <p class="listing listing__night_price">
           £<%= @listing.night_price.to_i/100 %>.00
         </p>
-
-        <div class="form__container">
-          <form
-            class="form"
-            action="/book_a_night/<%= @listing.id %>"
-            method="POST"
-          >
-            <label class="form__label" for="date_list_id">Date</label
-            ><input class="form__input" type="date" name="date" />
-            <input
-              class="form__input form__submit"
-              type="submit"
-              value="Request"
-            />
-          </form>
-        </div>
-
-        <div class="container__listings">
-          <ul class="list">
-            <% @dates_list.each do |date| %> <% next if date.booked_status ==
-            "t" %>
-            <li class="list__item"><%= date.date %></li>
-            <% end %>
-          </ul>
-        </div>
       </section>
+      <div class="form__container margin-top-20">
+        <form
+          class="form"
+          action="/book_a_night/<%= @listing.id %>"
+          method="POST"
+        >
+          <label class="form__label" for="date_list_id">Enter your chosen available date</label
+          ><input class="form__input" type="date" name="date" />
+          <input
+            class="form__input form__submit"
+            type="submit"
+            value="Request"
+          />
+        </form>
+      </div>
+      <div class="container__listings">
+        <h3 class="form__header">Available Dates</h3>
+        <ul class="dates_list">
+          <% @dates_list.each do |date| %> 
+          <% next if date.booked_status == "t" %>
+          <% @parsed_date = date.date.split('-').reverse.join(' / ') %>
+          <li class="dates_list__item"><%= @parsed_date %></li>
+          <% end %>
+        </ul>
+      </div>
     </header>
   </body>
 </html>

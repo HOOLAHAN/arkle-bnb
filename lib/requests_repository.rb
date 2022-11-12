@@ -28,7 +28,7 @@ class RequestsRepository
     def find_requests_by_requester_user_id(user_id)
         sql = "select * from requests inner join dates_list on requests.date_list_id = dates_list.id inner join listings on dates_list.listing_id = listings.id where requests.user_id = $1"
         requests = DatabaseConnection.exec_params(sql,[user_id])
-    end
+      end
 
     def find_requests_by_listing_user_id(user_id)
         

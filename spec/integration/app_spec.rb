@@ -29,13 +29,13 @@ describe Application do
       response = get('/')
 
       expect(response.status).to eq(200)
-      expect(response.body).to include('class="link" href="/login"')
+      expect(response.body).to include('class="link nav__link" href="/login"')
     end
     it 'returns alternate home when logged in' do
       post('/login', email: 'anna@gmail.com', password: '1234')
       response = get('/')
       expect(response.status).to eq(200)
-      expect(response.body).to include('class="link" href="/logout">Logout')
+      expect(response.body).to include('class="link nav__link" href="/logout">Logout')
     end
   end
 
@@ -85,10 +85,9 @@ describe Application do
       response = get('/listings/1')
       expect(response.status).to eq(200)
 
-
-      expect(response.body).to include('2023-01-20')
-      expect(response.body).to include('2023-01-21')
-      expect(response.body).not_to include('2023-01-23')
+      expect(response.body).to include('20 / 01 / 2023')
+      expect(response.body).to include('21 / 01 / 2023')
+      expect(response.body).not_to include('23 / 01 / 2023')
       expect(response.body).to include('MuddyShack')
 
     end
@@ -142,11 +141,11 @@ describe Application do
 
     it 'should contain some html data' do
       response = get('/welcome')
-      expect(response.body).to include('<title>Arkle-BnB</title>')
+      expect(response.body).to include('<title>Arkle-BnB: Welcome</title>')
       expect(response.body).to include(' <h1 class="blurb__header">Welcome!</h1>')
       expect(response.body).to include('Please Signup or Login.')
-      expect(response.body).to include('<a class="link" href="/signup">SignUp</a>')
-      expect(response.body).to include('<a class="link" href="/login">Login</a>')
+      expect(response.body).to include('<a class="link nav__link" href="/signup">Sign Up</a>')
+      expect(response.body).to include('<a class="link nav__link" href="/login">Login</a>')
     end
   end
 
@@ -198,8 +197,13 @@ describe Application do
   context 'POST /login' do
     it 'returns incorrect password' do
       response = post('/login', email: 'anna@gmail.com', password: '124')
+      expect(response.status).to eq 401
+      expect(response.body).to include 'Password incorrect'
+    end
+    it 'returns Email not found' do
+      response = post('/login', email: 'annaincorrect@gmail.com', password: '124')
       expect(response.status).to eq 400
-      expect(response.body).to include 'password wrong'
+      expect(response.body).to include 'Email not found'
     end
    
   end
@@ -209,7 +213,7 @@ describe Application do
         get('/logout')
         response = get('/')
         expect(response.status).to eq 200
-        expect(response.body).to include('<a class="link" href="/login">Login</a>')
+        expect(response.body).to include('<a class="link nav__link" href="/login">Login</a>')
         expect(response.body).to include('Please Signup or Login.')
       end
     end
@@ -223,11 +227,11 @@ describe Application do
         expect(response.body).to include("My Account")
       end 
       
-      it "returns array of requests by requesterid" do
+      it "returns array of requests by requesterid with status" do
         post('/login', email: "anna@gmail.com", password:'1234')
         response = get('/account')
         expect(response.status).to eq 200
-        expect(response.body).to include("2023-04-01")
+        expect(response.body).to include("01 / 04 / 2023")
         expect(response.body).to include("Dark Satanic Mills")
       end
       
