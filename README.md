@@ -10,6 +10,13 @@ Someone in your team should fork this seed repo to their Github account. Everyon
 # Install gems
 bundle install
 
+# Set up environment variables
+echo "export TWILIO_ACCOUNT_SID='XXXXXXXXXXXXXXX'" > twilio.env
+echo "export TWILIO_AUTH_TOKEN='XXXXXXXXXXXXX'" >> twilio.env
+echo "export IH_MOBILE='XXXXXXXXXXX'" >> twilio.env
+echo "export TWILIO_NUMBER='XXXXXXXX'" >> twilio.env
+source ./twilio.env
+
 # Run the tests
 rspec
 
@@ -40,5 +47,3 @@ Joe Tues
 Iain Weds
 Will Thurs
 FRI TBC (pen to decide)
-
-When we are upset we will raise it immediately in the Slack channel, separating the facts and the story as far as we are able, and giving actionable, specific and kind feedback as appropriate
