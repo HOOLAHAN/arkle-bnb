@@ -6,9 +6,9 @@ require './lib/listing'
 require './lib/listing_repository'
 require './lib/dates_list_repository'
 require './lib/requests_repository'
+require './lib/user_repository'
+require './lib/text'
 require './lib/converse_repository'
-require 'user_repository'
-require 'requests_repository'
 
 DatabaseConnection.connect('bnb_test')
 
@@ -51,6 +51,12 @@ class Application < Sinatra::Base
     session[:email] = new_user.email
     session[:user_id] = new_user.id
     @user = session[:name]
+    text_content = 'Signup Successful!', "Thank you, #{new_user.name} for signing up to ArkleBnB"
+    new_text = Text.new
+    new_text.send_text(text_content)
+    # send_email('arklebnb@gmail.com', 'bezel@mailinator.com', 'testing', 'content')
+    # send_email(new_user.email, 'Signup Successful!', "Thank you, #{new_user.name} for signing up to ArkleBnB")
+
     return erb(:menu_page)
   end
 
@@ -100,6 +106,10 @@ class Application < Sinatra::Base
     new_id = listing.create(@new_listing)
 
     dateslist = DatesListRepository.new.add_dates(new_id, params[:start_date], params[:end_date])
+    # send_email(session[:email], 'Listing Successful!', "Thank you, #{session[:name]} for listing #{@new_listing.name} on ArkleBnb")
+    text_content = "Thank you, #{session[:name]} for listing #{@new_listing.name} on ArkleBnb"
+    new_text = Text.new
+    new_text.send_text(text_content)
 
     return erb(:create_listing)
   end
@@ -142,6 +152,10 @@ class Application < Sinatra::Base
       request.user_id = session[:user_id]
       request.date_list_id = @date_list_id
       request_repo.create(request)
+      # send_email(session[:email], 'Request made!', "Hello, #{session[:name]}, your request to book a listing on ArkleBnb")
+      text_content = "Hello, #{session[:name]}, your request to book a listing on ArkleBnb has been sent"
+      new_text = Text.new
+      new_text.send_text(text_content)
 
       return erb(:booking_requested)
     end
@@ -198,4 +212,9 @@ class Application < Sinatra::Base
     redirect('/my_messages')
   end
 
+
 end
+
+
+#TODO
+  # Write email queries for request approved, request denied, someone has requested to book your property.

@@ -162,17 +162,8 @@ nav {
   border-radius: 5px;
 }
 
+.request__item,
 .list__item {
-  color: var(--text_dark);
-  display: flex;
-  flex-direction: column;
-  margin: 20px;
-  padding: 20px;
-  background-color: var(--primary);
-  border-radius: 5px;
-  transition: all 0.3s;
-}
-.request__item {
   color: var(--text_dark);
   display: flex;
   flex-direction: column;
@@ -276,6 +267,16 @@ nav {
   display: flex;
   flex-direction: column;
   width: 400px;
+  border: 1px solid var(--text_dark);
+  background-color: var(--primary);
+  padding: 30px 40px;
+  border-radius: 5px;
+}
+
+.form__msg {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
   border: 1px solid var(--text_dark);
   background-color: var(--primary);
   padding: 30px 40px;
