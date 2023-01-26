@@ -52,3 +52,24 @@ rackup
 # In the web browswer navigate to:
 http://localhost:9292/
 ```
+## Demo
+
+### Signup page:
+![signup](https://github.com/HOOLAHAN/arkle-bnb/blob/main/images/signup.png)
+
+### Login page:
+![login page](https://github.com/HOOLAHAN/arkle-bnb/blob/main/images/login.png)
+
+### Menu page
+![Menu](https://github.com/HOOLAHAN/arkle-bnb/blob/main/images/menu.png)
+
+### Booking page
+![Booking](https://github.com/HOOLAHAN/arkle-bnb/blob/main/images/book-a-space.png)
+
+### Account page
+![My-Account](https://github.com/HOOLAHAN/arkle-bnb/blob/main/images/my-account-1.png)
+![My-Account](https://github.com/HOOLAHAN/arkle-bnb/blob/main/images/my-account-2.png)
+
+### Messages Page
+![My-Messages](https://github.com/HOOLAHAN/arkle-bnb/blob/main/images/my-messages-1.png)
+![My-Messages](https://github.com/HOOLAHAN/arkle-bnb/blob/main/images/my-messages-2.png)
