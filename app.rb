@@ -19,7 +19,6 @@ class Application < Sinatra::Base
 
   enable :sessions
 
-
   get '/' do
     if session[:name].nil?
       return erb(:welcome)
@@ -54,9 +53,6 @@ class Application < Sinatra::Base
     text_content = 'Signup Successful!', "Thank you, #{new_user.name} for signing up to ArkleBnB"
     new_text = Text.new
     new_text.send_text(text_content)
-    # send_email('arklebnb@gmail.com', 'bezel@mailinator.com', 'testing', 'content')
-    # send_email(new_user.email, 'Signup Successful!', "Thank you, #{new_user.name} for signing up to ArkleBnB")
-
     return erb(:menu_page)
   end
 
@@ -106,7 +102,6 @@ class Application < Sinatra::Base
     new_id = listing.create(@new_listing)
 
     dateslist = DatesListRepository.new.add_dates(new_id, params[:start_date], params[:end_date])
-    # send_email(session[:email], 'Listing Successful!', "Thank you, #{session[:name]} for listing #{@new_listing.name} on ArkleBnb")
     text_content = "Thank you, #{session[:name]} for listing #{@new_listing.name} on ArkleBnb"
     new_text = Text.new
     new_text.send_text(text_content)
@@ -152,7 +147,6 @@ class Application < Sinatra::Base
       request.user_id = session[:user_id]
       request.date_list_id = @date_list_id
       request_repo.create(request)
-      # send_email(session[:email], 'Request made!', "Hello, #{session[:name]}, your request to book a listing on ArkleBnb")
       text_content = "Hello, #{session[:name]}, your request to book a listing on ArkleBnb has been sent"
       new_text = Text.new
       new_text.send_text(text_content)
@@ -193,10 +187,10 @@ class Application < Sinatra::Base
 
   get '/my_messages' do
     #0 ADD LINK TO MY_MESSAGES PAGE ON ACCOUNT PAGE
-      # 1 show all confirmed bookings that I've made as a list (use new sql query but build off other ones, including temp table)
-      # 2 show all confirmed bookings that I've received on my listings as a list, with different identifiers
-      # 3 display shortened conversation within the loops above of all relevant messages
-      #4 enable new messaging on these listings with a new box and a send button above message loop
+    # 1 show all confirmed bookings that I've made as a list (use new sql query but build off other ones, including temp table)
+    # 2 show all confirmed bookings that I've received on my listings as a list, with different identifiers
+    # 3 display shortened conversation within the loops above of all relevant messages
+    #4 enable new messaging on these listings with a new box and a send button above message loop
     #5 add a page for opening and reading the message
     #6 add message Read/unread data
     #7 display unread message count
@@ -214,7 +208,3 @@ class Application < Sinatra::Base
 
 
 end
-
-
-#TODO
-  # Write email queries for request approved, request denied, someone has requested to book your property.

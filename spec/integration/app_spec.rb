@@ -2,7 +2,6 @@ require 'spec_helper'
 require 'rack/test'
 require_relative '../../app'
 require 'json'
-# require 'request_repository'
 
 describe Application do
   include Rack::Test::Methods
@@ -75,8 +74,6 @@ describe Application do
       post('/listings', name: 'Trump tower', description: 'I will be back', night_price: 250_000,
                         start_date: '2023-01-03', end_date: '2023-02-03')
       expect(DatesListRepository.new.find_by_listing('4')[0]['date']).to include('2023-01-03')
-      # expect(DatesListRepository.new.find_by_listing('4')['date']).to include ('2023-02-03')
-      # expect(DatesListRepository.new.find_by_listing('4')['date']).to include ('2023-01-20')
     end
   end
 
@@ -183,10 +180,6 @@ describe Application do
   end
 
   context "POST to '/signup'" do
-    # it "can show success page" do
-    #   response = post('/signup', name: "jeff", email: "jeff@jeffworld.com", password: "mynameajeff")
-    #   expect(response.body).to include("Welcome, jeff, you are now logged in!")
-    # end
     it 'can sign up a user' do
       post('/signup', name: 'jeff', email: 'jeff@jeffworld.com', password: 'mynameajeff')
       repo = UserRepository.new
@@ -223,7 +216,7 @@ describe Application do
     #{"id"=>"1", "user_id"=>"1", "date_list_id"=>"1", "listing_id"=>"1", "date"=>"2023-01-20", "booked_status"=>"f", "booker_id"=>nil, "name"=>"MuddyShack", "description"=>"A surprisingly nice place to spend 10 minutes", "night_price"=>"10000"} 
     context "get '/account" do
       it "routes to account page correctly" do
-        post('/login', email: "bezel@mailinator.com", password:'666') #this line not needed?
+        post('/login', email: "bezel@mailinator.com", password:'666')
         response = get('/account')
         expect(response.status).to eq 200
         expect(response.body).to include("My Account")
