@@ -30,9 +30,26 @@ We would like a web application that allows users to list spaces they have avail
 - A ‘chat’ functionality once a space has been booked, allowing users whose space-booking request has been confirmed to chat with the user that owns that space
 - Basic payment implementation though Stripe.
 
-## Setup
+# Our Solution
+
+## Setup - How to install
 
 ```bash
+
+# Create a clone of this repo
+
+# Create 2 databases using PostgreSQL
+bnb
+bnb_test
+
+# Set up tables
+psql -h 127.0.0.1 bnb < bnb_seeds.sql
+psql -h 127.0.0.1 bnb_test < bnb_seeds.sql
+
+# Seed tables
+psql -h 127.0.0.1 bnb < bnb_seeds.sql
+psql -h 127.0.0.1 bnb_test < bnb_seeds.sql
+
 # Install gems
 bundle install
 
@@ -54,7 +71,7 @@ http://localhost:9292/
 ```
 ## Demo
 
-### Signup page:
+### Signup page
 ![signup](https://github.com/HOOLAHAN/arkle-bnb/blob/main/images/signup.png)
 
 ### Login page:
